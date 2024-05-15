@@ -19,9 +19,10 @@
         <section id="menu">
             <article class="menu">
                 <img src="/sprite/player.gif" alt="player">
-                <button id="start">▶</button>
+                <button id="start">❚❚</button>
                 <button id="settings">Settings</button>
                 <button id="about">About</button>
+                <button id="fullscreen">Fullscreen</button>
             </article>
         </section>
         <section id="game">
