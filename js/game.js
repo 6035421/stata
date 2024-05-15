@@ -5,6 +5,8 @@ const startTime = performance.now();
 level = 1;
 
 function changeLevel(level) {
+    window.level = level;
+    
     if (level === 1) {
         console.log('Level 1');
         let x = 100;

@@ -1,9 +1,25 @@
+@font-face {
+    font-family: 'pixelFont';
+    src: url('../assets/fonts/PublicPixel-E447g.ttf') format('truetype');
+  }
+  
+
 html, body {
     margin: 0;
     padding: 0;
     background-color: rgb(174, 164, 164);
     font-family: 'Arial', sans-serif;
+
+    height:100%;
+
+    background-repeat:no-repeat;
+    background-size:cover;
 }
+
+body {
+    display:flex;
+}
+
 #menu {
     color: white;
     #start, #settings, #about, #fullscreen {
@@ -41,3 +57,82 @@ html, body {
     border-radius: 50%;
     margin-bottom: 20px;
 }
+
+#buttons {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-areas: 'play play'
+    'vrienden account';
+
+    grid-column-gap:8px;
+    grid-row-gap:8px;
+}
+
+.HomeMenuList {
+    width:50%;
+
+    margin:auto;
+    margin-top:10%;
+}
+
+.HomeMenuList #buttons * {
+    text-align:center;
+
+    border-radius:10px;
+
+    background-color:#D37575;
+
+    color:white;
+    font-family:'pixelFont';
+
+    padding:8px;
+
+    text-decoration:none;
+}
+
+#play {
+    grid-area:play;
+}
+
+#vrienden {
+    grid-area:vrienden;
+}
+
+#account {
+    grid-area:account;
+}
+
+#logo {
+    display:flex;
+    flex-direction:row;
+
+    justify-content: center;
+
+    margin-bottom:8px;
+}
+
+.pixel-corners {
+    clip-path: polygon(
+      0px calc(100% - 8px),
+      4px calc(100% - 8px),
+      4px calc(100% - 4px),
+      8px calc(100% - 4px),
+      8px 100%,
+      calc(100% - 8px) 100%,
+      calc(100% - 8px) calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 8px),
+      100% calc(100% - 8px),
+      100% 8px,
+      calc(100% - 4px) 8px,
+      calc(100% - 4px) 4px,
+      calc(100% - 8px) 4px,
+      calc(100% - 8px) 0px,
+      8px 0px,
+      8px 4px,
+      4px 4px,
+      4px 8px,
+      0px 8px
+    );
+  }
