@@ -14,8 +14,18 @@
     </header>
 
     <!-- Main -->
-    <main>
-        
+    <main class='HomeMenuList'>
+        <section>
+            <article id='logo'>
+            <img src="/assets/images/logo.png" alt="player">
+            </article>
+
+            <article id='buttons'>
+        <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>
+        <a class='pixel-corners' id='vrienden' href='./game/index.php'>Vrienden</a>
+        <a class='pixel-corners' id='account' href='./game/index.php'>Account</a>
+        </article>
+</section>
     </main>
 
     <!-- Footer -->
@@ -23,5 +33,5 @@
 
     </footer>
 </body>
-    <script src="/js/index.js"></script>
+    <script src="/js/menu.js"></script>
 </html>
