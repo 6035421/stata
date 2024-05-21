@@ -92,12 +92,12 @@ function changeLevel(level) {
 
             // Barrelgrounds
             // Top Row
-            ctx.drawImage(barrelgroundImage, 120, 100, 50, 50);
-            ctx.drawImage(barrelgroundImage, 170, 100, 50, 50);
-            ctx.drawImage(barrelgroundImage, 220, 100, 50, 50);
-            ctx.drawImage(barrelgroundImage, 270, 100, 50, 50);
-            ctx.drawImage(barrelgroundImage, 320, 100, 50, 50);
-            ctx.drawImage(barrelgroundImage, 370, 100, 50, 50);
+            ctx.drawImage(barrelgroundImage, 120, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 170, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 220, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 270, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 320, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 370, 130, 50, 50);
 
             // Row 1
             ctx.drawImage(barrelgroundImage, 1200, 200, 50, 50);
@@ -108,10 +108,10 @@ function changeLevel(level) {
             ctx.drawImage(barrelgroundImage, 1450, 200, 50, 50);
 
             // Barrels
-            ctx.drawImage(barrelImage, 120, 40, 100, 100);
+            ctx.drawImage(barrelImage, 120, 70, 100, 100);
 
             // Boss
-            ctx.drawImage(bossImage, 120, 10, 100, 100);
+            ctx.drawImage(bossImage, 120, 40, 100, 100);
 
             // Enemy
             ctx.drawImage(enemyImage, 1300, 110, 100, 100);
