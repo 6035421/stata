@@ -45,5 +45,5 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     </footer>
 </body>
-    <script src="/js/index.js"></script>
+<script src="/js/menu.js"></script>
 </html>

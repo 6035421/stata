@@ -1,28 +1,34 @@
 @font-face {
     font-family: 'pixelFont';
     src: url('../assets/fonts/PublicPixel-E447g.ttf') format('truetype');
-  }
-  
+}
 
-html, body {
+
+html,
+body {
     margin: 0;
     padding: 0;
     background-color: rgb(174, 164, 164);
     font-family: 'Arial', sans-serif;
 
-    height:100%;
+    height: 100%;
 
-    background-repeat:no-repeat;
-    background-size:cover;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 body {
-    display:flex;
+    display: flex;
 }
 
 #menu {
     color: white;
-    #start, #home, #settings, #about, #fullscreen {
+
+    #start,
+    #home,
+    #settings,
+    #about,
+    #fullscreen {
         background-color: rgb(255, 117, 117);
         color: white;
         border: none;
@@ -35,7 +41,12 @@ body {
         cursor: pointer;
         border-radius: 10px;
     }
-    #start:hover, #home:hover, #settings:hover, #about:hover, #fullscreen:hover {
+
+    #start:hover,
+    #home:hover,
+    #settings:hover,
+    #about:hover,
+    #fullscreen:hover {
         background-color: rgb(255, 80, 80);
         color: white;
     }
@@ -59,80 +70,93 @@ body {
 }
 
 #buttons {
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 1fr;
 
     grid-template-areas: 'play play'
-    'vrienden account';
+        'vrienden account';
 
-    grid-column-gap:8px;
-    grid-row-gap:8px;
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
 }
 
 .HomeMenuList {
-    width:50%;
+    width: 50%;
 
-    margin:auto;
-    margin-top:10%;
+    margin: auto;
+    margin-top: 10%;
 }
 
 .HomeMenuList #buttons * {
-    text-align:center;
+    text-align: center;
 
-    border-radius:10px;
+    border-radius: 10px;
 
-    background-color:#D37575;
+    background-color: #D37575;
 
-    color:white;
-    font-family:'pixelFont';
+    color: white;
+    font-family: 'pixelFont';
 
-    padding:8px;
+    padding: 8px;
 
-    text-decoration:none;
+    text-decoration: none;
 }
 
 #play {
-    grid-area:play;
+    grid-area: play;
 }
 
 #vrienden {
-    grid-area:vrienden;
+    grid-area: vrienden;
 }
 
 #account {
-    grid-area:account;
+    grid-area: account;
 }
 
 #logo {
-    display:flex;
-    flex-direction:row;
+    display: flex;
+    flex-direction: row;
 
     justify-content: center;
 
-    margin-bottom:8px;
+    margin-bottom: 8px;
 }
 
 .pixel-corners {
-    clip-path: polygon(
-      0px calc(100% - 8px),
-      4px calc(100% - 8px),
-      4px calc(100% - 4px),
-      8px calc(100% - 4px),
-      8px 100%,
-      calc(100% - 8px) 100%,
-      calc(100% - 8px) calc(100% - 4px),
-      calc(100% - 4px) calc(100% - 4px),
-      calc(100% - 4px) calc(100% - 8px),
-      100% calc(100% - 8px),
-      100% 8px,
-      calc(100% - 4px) 8px,
-      calc(100% - 4px) 4px,
-      calc(100% - 8px) 4px,
-      calc(100% - 8px) 0px,
-      8px 0px,
-      8px 4px,
-      4px 4px,
-      4px 8px,
-      0px 8px
-    );
-  }
+    clip-path: polygon(0px calc(100% - 8px),
+            4px calc(100% - 8px),
+            4px calc(100% - 4px),
+            8px calc(100% - 4px),
+            8px 100%,
+            calc(100% - 8px) 100%,
+            calc(100% - 8px) calc(100% - 4px),
+            calc(100% - 4px) calc(100% - 4px),
+            calc(100% - 4px) calc(100% - 8px),
+            100% calc(100% - 8px),
+            100% 8px,
+            calc(100% - 4px) 8px,
+            calc(100% - 4px) 4px,
+            calc(100% - 8px) 4px,
+            calc(100% - 8px) 0px,
+            8px 0px,
+            8px 4px,
+            4px 4px,
+            4px 8px,
+            0px 8px);
+}
+
+
+#menu {
+    position: fixed;
+}
+
+#menu .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.menu * {
+    height: min-content;
+}
