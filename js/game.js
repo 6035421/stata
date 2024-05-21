@@ -159,6 +159,10 @@ function changeLevel(level) {
 
     // Level 2 in level2.js
     if (level === 2) {
+        let x = 400;
+        let y = 410;
+        const width = 100;
+        const height = 100;
         const startTime = performance.now();
         // Clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -176,7 +180,78 @@ function changeLevel(level) {
             ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
             // Player
-            ctx.drawImage(playerImage, 100, 100, 100, 100);
+            ctx.drawImage(playerImage, x, y, width, height);
+
+            // No texture
+            ctx.drawImage(notextureImage, 425, 505, 50, 50);
+            ctx.drawImage(notextureImage, 475, 505, 50, 50);
+            ctx.drawImage(notextureImage, 525, 505, 50, 50);
+            ctx.drawImage(notextureImage, 575, 505, 50, 50);
+        }
+
+        backgroundImage.onload = function () {
+            draw();
+        };
+
+        playerImage.onload = function () {
+            draw();
+        }
+
+        notextureImage.onload = function () {
+            draw();
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
+                playerImage.src = '../sprite/player-jump.png';
+                y -= 20;
+                setTimeout(function () {
+                    playerImage.src = '../sprite/player-normal.png';
+                    y += 20;
+                }, 500);
+            }
+
+            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+                playerImage.src = '../sprite/player-right.png';
+                x += 10;
+            }
+
+            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+                playerImage.src = '../sprite/player-left.png';
+                x -= 10;
+            }
+        });
+
+
+        const endTime = performance.now();
+        const loadTime = endTime - startTime;
+        console.log(`Level 2 geladen in ${loadTime} milliseconden`);
+    }
+
+    // Level 3 
+    if (level === 3) {
+        let x = 100;
+        let y = 100;
+        const width = 100;
+        const height = 100;
+        const startTime = performance.now();
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const backgroundImage = new Image();
+        backgroundImage.src = '../assets/images/suburbia.png';
+
+        const playerImage = new Image();
+        playerImage.src = '../sprite/player-normal.png';
+
+        const notextureImage = new Image();
+        notextureImage.src = '../sprite/notexture.png';
+
+        function draw() {
+            ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+            // Player
+            ctx.drawImage(playerImage, x, y, width, height);
 
             // No texture
             ctx.drawImage(notextureImage, 125, 195, 50, 50);
@@ -196,11 +271,31 @@ function changeLevel(level) {
             draw();
         }
 
-    }
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
+                playerImage.src = '../sprite/player-jump.png';
+                y -= 20;
+                setTimeout(function () {
+                    playerImage.src = '../sprite/player-normal.png';
+                    y += 20;
+                }, 500);
+            }
 
-    const endTime = performance.now();
-    const loadTime = endTime - startTime;
-    console.log(`Level 2 geladen in ${loadTime} milliseconden`);
+            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+                playerImage.src = '../sprite/player-right.png';
+                x += 10;
+            }
+
+            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+                playerImage.src = '../sprite/player-left.png';
+                x -= 10;
+            }
+        });
+
+        const endTime = performance.now();
+        const loadTime = endTime - startTime;
+        console.log(`Level 3 geladen in ${loadTime} milliseconden`);
+    }
 };
 
 // Start button
