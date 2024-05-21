@@ -1,6 +1,11 @@
 const fullscreenButton = document.getElementById("fullscreen");
 const gameCanvas = document.getElementById("gameCanvas");
 const body = document.body
+const home = document.getElementById('home');
+
+home.onclick = function () {
+    window.location.href = '../index.php';
+}
 
 fullscreenButton.addEventListener("click", () => {
     if(fullscreenButton.innerHTML == 'Fullscreen') {

@@ -20,6 +20,7 @@
             <article class="menu">
                 <img src="/sprite/player.gif" alt="player">
                 <button id="start">❚❚</button>
+                <button id="home">Home</button>
                 <button id="settings">Settings</button>
                 <button id="about">About</button>
                 <button id="fullscreen">Fullscreen</button>

@@ -22,7 +22,7 @@ body {
 
 #menu {
     color: white;
-    #start, #settings, #about, #fullscreen {
+    #start, #home, #settings, #about, #fullscreen {
         background-color: rgb(255, 117, 117);
         color: white;
         border: none;
@@ -35,7 +35,7 @@ body {
         cursor: pointer;
         border-radius: 10px;
     }
-    #start:hover, #settings:hover, #about:hover, #fullscreen:hover {
+    #start:hover, #home:hover, #settings:hover, #about:hover, #fullscreen:hover {
         background-color: rgb(255, 80, 80);
         color: white;
     }
