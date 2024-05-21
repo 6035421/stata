@@ -22,8 +22,8 @@
 
             <article id='buttons'>
         <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>
-        <a class='pixel-corners' id='vrienden' href='./game/index.php'>Vrienden</a>
-        <a class='pixel-corners' id='account' href='./game/index.php'>Account</a>
+        <a class='pixel-corners' id='vrienden' href='./vrienden.php'>Vrienden</a>
+        <a class='pixel-corners' id='account' href='./profile.php'>Account</a>
         </article>
 </section>
     </main>

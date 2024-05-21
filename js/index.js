@@ -1,18 +1,19 @@
 const fullscreenButton = document.getElementById("fullscreen");
-const gameCanvas = document.body
+const gameCanvas = document.getElementById("gameCanvas");
+const body = document.body
 
 fullscreenButton.addEventListener("click", () => {
     if(fullscreenButton.innerHTML == 'Fullscreen') {
         fullscreenButton.innerHTML = 'Close Fullscreen';
 
-    if (gameCanvas.requestFullscreen) {
-        gameCanvas.requestFullscreen();
-    } else if (gameCanvas.mozRequestFullScreen) { // Firefox
-        gameCanvas.mozRequestFullScreen();
-    } else if (gameCanvas.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        gameCanvas.webkitRequestFullscreen();
-    } else if (gameCanvas.msRequestFullscreen) { // IE/Edge
-        gameCanvas.msRequestFullscreen();
+    if (body.requestFullscreen) {
+        body.requestFullscreen();
+    } else if (body.mozRequestFullScreen) { // Firefox
+        body.mozRequestFullScreen();
+    } else if (body.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        body.webkitRequestFullscreen();
+    } else if (body.msRequestFullscreen) { // IE/Edge
+        body.msRequestFullscreen();
     }
 } else {
     fullscreenButton.innerHTML = 'Fullscreen';
