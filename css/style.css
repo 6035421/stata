@@ -158,5 +158,6 @@ body {
 }
 
 .menu * {
-    height: min-content;
+    max-height: 39px;
+    min-height: 39px;
 }
