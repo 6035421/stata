@@ -312,7 +312,6 @@ startButton.addEventListener('click', function () {
         const ctx = gameCanvas.getContext('2d');
         ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-
         gameCanvas.style.display = 'block';
         const backgroundImage = new Image();
         backgroundImage.src = '../assets/images/classroom.jpeg';
@@ -321,6 +320,7 @@ startButton.addEventListener('click', function () {
             draw();
         };
 
+        changeLevel(level);
     } else {
         cancelScoreCounting();
 
@@ -373,5 +373,5 @@ function startScoreCounting () {
     },1);
 }
 
-changeLevel(1);
+changeLevel(level);
 startScoreCounting();
