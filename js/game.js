@@ -2,6 +2,10 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const startButton = document.getElementById('start');
 const startTime = performance.now();
+
+const scoreEl = document.getElementById('highscore');
+let scoreTimer, score = 0;
+
 level = 1;
 
 function changeLevel(level) {
@@ -301,6 +305,8 @@ function changeLevel(level) {
 // Start button
 startButton.addEventListener('click', function () {
     if (startButton.textContent === '▶') {
+        startScoreCounting();
+
         startButton.textContent = '❚❚';
         gameCanvas.style.display = 'block';
         const ctx = gameCanvas.getContext('2d');
@@ -316,6 +322,8 @@ startButton.addEventListener('click', function () {
         };
 
     } else {
+        cancelScoreCounting();
+
         startButton.textContent = '▶';
         const ctx = gameCanvas.getContext('2d');
         ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
@@ -323,6 +331,9 @@ startButton.addEventListener('click', function () {
         ctx.fillStyle = 'white';
         ctx.font = '50px Arial';
         ctx.fillText('PAUSED', gameCanvas.width / 2 - 100, gameCanvas.height / 2);
+
+        ctx.font = '15px Arial';
+        ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
         // When paused the player can't move
         document.removeEventListener('keydown', function (event) {
             if (event.code === 'KeyW' || event.code === 'ArrowUp') {
@@ -347,4 +358,20 @@ startButton.addEventListener('click', function () {
     }
 });
 
+function cancelScoreCounting() {
+    scoreEl.style.display = 'none';
+
+    window.clearInterval(scoreTimer);
+}
+
+function startScoreCounting () {
+    scoreEl.style.display = 'block';
+
+    scoreTimer = window.setInterval(function () {
+        score+= 0.01;
+        scoreEl.innerHTML = `Score: ${score.toFixed(3)}`
+    },1);
+}
+
 changeLevel(1);
+startScoreCounting();

@@ -146,15 +146,18 @@ body {
             0px 8px);
 }
 
-
 #menu {
     position: fixed;
+
+    width:100%;
 }
 
 #menu .menu {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+
+    width:100%;
 }
 
 .menu * {

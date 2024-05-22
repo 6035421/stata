@@ -19,11 +19,13 @@
         <section id="menu">
             <article class="menu">
                 <img src="/sprite/player.gif" alt="player">
-                <button id="start">❚❚</button>
-                <button id="home">Home</button>
-                <button id="settings">Settings</button>
-                <button id="about">About</button>
-                <button id="fullscreen">Fullscreen</button>
+                <button class='pixel-corners' id="start">❚❚</button>
+                <button class='pixel-corners' id="home">Home</button>
+                <button class='pixel-corners' id="settings">Settings</button>
+                <button class='pixel-corners' id="about">About</button>
+                <button class='pixel-corners' id="fullscreen">Fullscreen</button>
+
+                <p id='highscore'></p>
             </article>
         </section>
         <section id="game">
