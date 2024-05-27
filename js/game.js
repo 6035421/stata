@@ -6,23 +6,22 @@ const startTime = performance.now();
 const scoreEl = document.getElementById('highscore');
 let scoreTimer, score = 0;
 
+let playerImage, x, y, width, height;
+
+let forward = null, backward = null, jumping = null;
+
 level = 1;
 
 function changeLevel(level) {
     window.level = level;
-    
+
+    initPlayer();
+
     if (level === 1) {
         console.log('Level 1');
-        let x = 100;
-        let y = 503;
-        const width = 100;
-        const height = 100;
 
         const backgroundImage = new Image();
         backgroundImage.src = '../assets/images/classroom.jpeg';
-
-        const playerImage = new Image();
-        playerImage.src = '../sprite/player-normal.png';
 
         const enemyImage = new Image();
         enemyImage.src = '../sprite/level1/enemy-idleleft.png';
@@ -51,27 +50,6 @@ function changeLevel(level) {
         const ladderImage = new Image();
         ladderImage.src = '../sprite/ladder.png';
 
-        document.addEventListener('keydown', function (event) {
-            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 20;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 20;
-                }, 500);
-            }
-
-            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
-                playerImage.src = '../sprite/player-right.png';
-                x += 10;
-            }
-
-            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
-                playerImage.src = '../sprite/player-left.png';
-                x -= 10;
-            }
-        });
-
         function draw() {
             // Clear the canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -94,6 +72,32 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 525, 470, 50, 50);
             ctx.drawImage(plankImage, 575, 470, 50, 50);
 
+            //planks row 3
+            ctx.drawImage(plankImage, 1000, 600, 50, 50);
+            ctx.drawImage(plankImage, 1050, 600, 50, 50);
+            ctx.drawImage(plankImage, 1100, 600, 50, 50);
+            ctx.drawImage(plankImage, 1150, 600, 50, 50);
+            ctx.drawImage(plankImage, 1200, 600, 50, 50);
+            ctx.drawImage(plankImage, 1250, 600, 50, 50);
+            ctx.drawImage(plankImage, 1300, 600, 50, 50);
+
+            //ladder row 3
+            ctx.drawImage(ladderImage, 1250, 515, 100, 100);
+            ctx.drawImage(ladderImage, 1250, 430, 100, 100);
+            ctx.drawImage(ladderImage, 1250, 345, 100, 100);
+
+            //planks row 4
+            ctx.drawImage(plankImage, 1275, 300, 50, 50);
+            ctx.drawImage(plankImage, 1225, 300, 50, 50);
+
+            //planks row 5
+            ctx.drawImage(plankImage, 1000, 370, 50, 50);
+            ctx.drawImage(plankImage, 950, 370, 50, 50);
+
+            //planks row 6
+            ctx.drawImage(plankImage, 1000, 270, 50, 50);
+            ctx.drawImage(plankImage, 950, 270, 50, 50);
+
             // Barrelgrounds
             // Top Row
             ctx.drawImage(barrelgroundImage, 120, 130, 50, 50);
@@ -104,12 +108,12 @@ function changeLevel(level) {
             ctx.drawImage(barrelgroundImage, 370, 130, 50, 50);
 
             // Row 1
-            ctx.drawImage(barrelgroundImage, 1200, 200, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1250, 200, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1300, 200, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1350, 200, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1400, 200, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1450, 200, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1200, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1250, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1300, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1350, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1400, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1450, 150, 50, 50);
 
             // Barrels
             ctx.drawImage(barrelImage, 120, 70, 100, 100);
@@ -118,10 +122,10 @@ function changeLevel(level) {
             ctx.drawImage(bossImage, 120, 40, 100, 100);
 
             // Enemy
-            ctx.drawImage(enemyImage, 1300, 110, 100, 100);
+            ctx.drawImage(enemyImage, 1300, 60, 100, 100);
 
             // Ladder
-            ctx.drawImage(ladderImage, 400, 520, 100, 100);
+            ctx.drawImage(ladderImage, 400, 515, 100, 100);
 
             // Player
             ctx.drawImage(playerImage, x, y, width, height);
@@ -205,28 +209,6 @@ function changeLevel(level) {
             draw();
         }
 
-        document.addEventListener('keydown', function (event) {
-            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 20;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 20;
-                }, 500);
-            }
-
-            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
-                playerImage.src = '../sprite/player-right.png';
-                x += 10;
-            }
-
-            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
-                playerImage.src = '../sprite/player-left.png';
-                x -= 10;
-            }
-        });
-
-
         const endTime = performance.now();
         const loadTime = endTime - startTime;
         console.log(`Level 2 geladen in ${loadTime} milliseconden`);
@@ -274,27 +256,6 @@ function changeLevel(level) {
         notextureImage.onload = function () {
             draw();
         }
-
-        document.addEventListener('keydown', function (event) {
-            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 20;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 20;
-                }, 500);
-            }
-
-            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
-                playerImage.src = '../sprite/player-right.png';
-                x += 10;
-            }
-
-            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
-                playerImage.src = '../sprite/player-left.png';
-                x -= 10;
-            }
-        });
 
         const endTime = performance.now();
         const loadTime = endTime - startTime;
@@ -364,13 +325,73 @@ function cancelScoreCounting() {
     window.clearInterval(scoreTimer);
 }
 
-function startScoreCounting () {
+function startScoreCounting() {
     scoreEl.style.display = 'block';
 
     scoreTimer = window.setInterval(function () {
-        score+= 0.01;
+        score += 0.01;
         scoreEl.innerHTML = `Score: ${score.toFixed(3)}`
-    },1);
+    }, 1);
+}
+
+function addControls() {
+    document.addEventListener('keyup', function (event) {
+        if (event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') {
+            clearInterval(jumping);
+            jumping = null;
+        }
+
+        if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+            clearInterval(forward);
+            forward = null;
+        }
+
+        if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+            clearInterval(backward);
+            backward = null;
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null) {
+            jumping = window.setInterval(function () {
+                playerImage.src = '../sprite/player-jump.png';
+                y -= 30;
+                setTimeout(function () {
+                    playerImage.src = '../sprite/player-normal.png';
+                    y += 30;
+                }, 450);
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
+            forward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-right.png';
+                x += 10;
+
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowLeft' || event.code === 'KeyA') && backward === null) {
+            backward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-left.png';
+                x -= 10;
+
+            }, 70);
+        }
+    });
+}
+
+function initPlayer() {
+    x = 100;
+    y = 503;
+    width = 100;
+    height = 100;
+
+    playerImage = new Image();
+    playerImage.src = '../sprite/player-normal.png';
+
+    addControls();
 }
 
 changeLevel(level);
