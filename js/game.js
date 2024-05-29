@@ -282,6 +282,7 @@ startButton.addEventListener('click', function () {
         changeLevel(level);
     } else {
         cancelScoreCounting();
+        clearInterval(interval);
 
         startButton.textContent = '▶';
         const ctx = gameCanvas.getContext('2d');
@@ -289,31 +290,13 @@ startButton.addEventListener('click', function () {
         ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
         ctx.fillStyle = 'white';
         ctx.font = '50px Arial';
-        ctx.fillText('PAUSED', gameCanvas.width / 2 - 100, gameCanvas.height / 2);
+        ctx.fillText('PAUSED', gameCanvas.width / 2 - 150, gameCanvas.height / 2);
 
         ctx.font = '15px Arial';
         ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
         // When paused the player can't move
-        document.removeEventListener('keydown', function (event) {
-            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 20;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 20;
-                }, 500);
-            }
 
-            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
-                playerImage.src = '../sprite/player-right.png';
-                x += 10;
-            }
-
-            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
-                playerImage.src = '../sprite/player-left.png';
-                x -= 10;
-            }
-        });
+        removeControls();
     }
 });
 
@@ -390,6 +373,64 @@ function addControls() {
     });
 }
 
+function removeControls() {
+    document.removeEventListener('keyup', function (event) {
+        if (event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') {
+            clearInterval(jumping);
+            jumping = null;
+        }
+
+        if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+            clearInterval(forward);
+            forward = null;
+        }
+
+        if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+            clearInterval(backward);
+            backward = null;
+        }
+    });
+
+    document.removeEventListener('keydown', function (event) {
+        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null) {
+            jumping = window.setInterval(function () {
+                playerImage.src = '../sprite/player-jump.png';
+                y -= 30;
+
+                fall();
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
+            forward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-right.png';
+
+                if (x > (window.innerWidth - 75)) {
+                    return;
+                }
+
+                checkUnderground();
+                x += 10;
+
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowLeft' || event.code === 'KeyA') && backward === null) {
+            backward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-left.png';
+
+                if (x === -10) {
+                    return;
+                }
+
+                checkUnderground();
+                x -= 10;
+
+            }, 70);
+        }
+    });
+}
+
 function initPlayer() {
     x = 100;
     y = 503;
@@ -408,20 +449,22 @@ function fall() {
         playerImage.src = '../sprite/player-normal.png';
         y += 1;
 
-        checkDeath();
+        if (checkDeath()) {
+            gameOver();
+        }
 
         console.log(y + parseInt(playerImage.height))
         let color = ctx.getImageData(x, y + 35 + parseInt(playerImage.height), 1, 1).data.join(',');
         console.log(color)
         console.log(color == '172,133,91,255');
 
-        document.getElementById('testDiv').style.top = y + 35 + parseInt(playerImage.height) +'px';
+        document.getElementById('testDiv').style.top = y + 35 + parseInt(playerImage.height) + 'px';
         document.getElementById('testDiv').style.left = x + 'px'
 
         if (color == '172,133,91,255') {
             clearInterval(interval);
         }
-    }, 1000); // 1000 voor testen
+    }, 1); // 1000 voor testen
 }
 
 function checkUnderground() {
@@ -432,13 +475,27 @@ changeLevel(level);
 startScoreCounting();
 
 function checkDeath() {
-    if(y > (window.innerHeight - 65)) {
-        gameOver();
-    }
+    return y > (window.innerHeight - 65);
 }
 
-function gameOver () {
+function gameOver() {
+    cancelScoreCounting();
+    clearInterval(interval);
 
+    window.setTimeout(function () {
+        const ctx = gameCanvas.getContext('2d');
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+        ctx.fillStyle = 'white';
+        ctx.font = '50px Arial';
+        ctx.fillText('GAME OVER', gameCanvas.width / 2 - 150, gameCanvas.height / 2);
+
+        ctx.font = '15px Arial';
+        ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        // When paused the player can't move
+
+        removeControls();
+    }, 500);
 }
 
 function getCursorPosition(canvas, event) {
