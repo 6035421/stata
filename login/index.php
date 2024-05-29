@@ -1,12 +1,12 @@
 <?php
 session_start();
-include 'db.php';
+include '../database/connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['gebruikersnaam'];
     $password = $_POST['wachtwoord'];
 
-    $sql = "SELECT * FROM admin WHERE gebruikersnaam ='$username'";
+    $sql = "SELECT * FROM gebruikers WHERE gebruikersnaam ='$username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {

@@ -2,12 +2,9 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const startButton = document.getElementById('start');
 const startTime = performance.now();
-
 const scoreEl = document.getElementById('highscore');
 let scoreTimer, score = 0;
-
 let playerImage, x, y, width, height;
-
 let forward = null, backward = null, jumping = null;
 
 level = 1;
