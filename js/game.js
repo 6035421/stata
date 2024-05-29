@@ -12,6 +12,8 @@ let forward = null, backward = null, jumping = null;
 
 let interval;
 
+let menu = document.getElementById('menu');
+
 level = 1;
 
 function changeLevel(level) {
@@ -264,6 +266,8 @@ function changeLevel(level) {
 // Start button
 startButton.addEventListener('click', function () {
     if (startButton.textContent === '▶') {
+        menu.classList.remove('gameOverMenu');
+
         startScoreCounting();
 
         startButton.textContent = '❚❚';
@@ -281,6 +285,8 @@ startButton.addEventListener('click', function () {
 
         changeLevel(level);
     } else {
+        menu.classList.add('gameOverMenu');
+
         cancelScoreCounting();
         clearInterval(interval);
 
@@ -290,7 +296,7 @@ startButton.addEventListener('click', function () {
         ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
         ctx.fillStyle = 'white';
         ctx.font = '50px Arial';
-        ctx.fillText('PAUSED', gameCanvas.width / 2 - 150, gameCanvas.height / 2);
+        ctx.fillText('PAUSED', gameCanvas.width / 2 - 100, gameCanvas.height / 2);
 
         ctx.font = '15px Arial';
         ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
@@ -482,7 +488,9 @@ function gameOver() {
     cancelScoreCounting();
     clearInterval(interval);
 
-    window.setTimeout(function () {
+    menu.classList.add('gameOverMenu');
+
+    window.setTimeout(function () { // for some reason this needs to be delayed, couldnt find why
         const ctx = gameCanvas.getContext('2d');
         ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
         ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -495,7 +503,7 @@ function gameOver() {
         // When paused the player can't move
 
         removeControls();
-    }, 500);
+    }, 10);
 }
 
 function getCursorPosition(canvas, event) {
