@@ -38,6 +38,8 @@
         </section>
     </main>
 
+    <div id='testDiv'></div>
+
     <!-- footer -->
     <footer>
 

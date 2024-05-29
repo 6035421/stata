@@ -10,6 +10,8 @@ let playerImage, x, y, width, height;
 
 let forward = null, backward = null, jumping = null;
 
+let interval;
+
 level = 1;
 
 function changeLevel(level) {
@@ -169,8 +171,6 @@ function changeLevel(level) {
     if (level === 2) {
         let x = 400;
         let y = 410;
-        const width = 100;
-        const height = 100;
         const startTime = performance.now();
         // Clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -218,8 +218,6 @@ function changeLevel(level) {
     if (level === 3) {
         let x = 100;
         let y = 100;
-        const width = 100;
-        const height = 100;
         const startTime = performance.now();
         // Clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -357,16 +355,20 @@ function addControls() {
             jumping = window.setInterval(function () {
                 playerImage.src = '../sprite/player-jump.png';
                 y -= 30;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 30;
-                }, 450);
+
+                fall();
             }, 70);
         }
 
         if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
             forward = window.setInterval(function () {
                 playerImage.src = '../sprite/player-right.png';
+
+                if (x > (window.innerWidth - 75)) {
+                    return;
+                }
+
+                checkUnderground();
                 x += 10;
 
             }, 70);
@@ -375,6 +377,12 @@ function addControls() {
         if ((event.code === 'ArrowLeft' || event.code === 'KeyA') && backward === null) {
             backward = window.setInterval(function () {
                 playerImage.src = '../sprite/player-left.png';
+
+                if (x === -10) {
+                    return;
+                }
+
+                checkUnderground();
                 x -= 10;
 
             }, 70);
@@ -394,5 +402,53 @@ function initPlayer() {
     addControls();
 }
 
+function fall() {
+    clearInterval(interval);
+    interval = setInterval(function () {
+        playerImage.src = '../sprite/player-normal.png';
+        y += 1;
+
+        checkDeath();
+
+        console.log(y + parseInt(playerImage.height))
+        let color = ctx.getImageData(x, y + 35 + parseInt(playerImage.height), 1, 1).data.join(',');
+        console.log(color)
+        console.log(color == '172,133,91,255');
+
+        document.getElementById('testDiv').style.top = y + 35 + parseInt(playerImage.height) +'px';
+        document.getElementById('testDiv').style.left = x + 'px'
+
+        if (color == '172,133,91,255') {
+            clearInterval(interval);
+        }
+    }, 1000); // 1000 voor testen
+}
+
+function checkUnderground() {
+
+}
+
 changeLevel(level);
 startScoreCounting();
+
+function checkDeath() {
+    if(y > (window.innerHeight - 65)) {
+        gameOver();
+    }
+}
+
+function gameOver () {
+
+}
+
+function getCursorPosition(canvas, event) {
+    const rect = canvas.getBoundingClientRect()
+    const xx = event.clientX - rect.left
+    const xy = event.clientY - rect.top
+    console.log("x: " + xx + " y: " + xy)
+    console.log("x: " + x + " y: " + y)
+}
+
+canvas.addEventListener('mousedown', function (e) {
+    getCursorPosition(canvas, e)
+})
