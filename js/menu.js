@@ -1,4 +1,4 @@
-if(window.level == 2) {
+if(window.localStorage.level == 2) {
     document.body.style.backgroundImage = 'url("../../assets/images/park.png")';
 } else if(window.level == 3) {
     document.body.style.backgroundImage = 'url("../../assets/images/bar.png")';

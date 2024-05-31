@@ -13,7 +13,7 @@ let forward = null, backward = null, jumping = null;
 level = 1;
 
 function changeLevel(level) {
-    window.level = level;
+    window.localStorage.level = level;
 
     initPlayer();
 
