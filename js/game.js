@@ -33,7 +33,7 @@ function changeLevel(level) {
         plankImage.src = '../sprite/plank-sprite.png';
 
         const barrelImage = new Image();
-        barrelImage.src = '../sprite/level1/barrel-lay.png';
+        barrelImage.src = '../sprite/level1/barrel-mop.png';
 
         const barrelgroundImage = new Image();
         barrelgroundImage.src = '../sprite/level1/barrelground.png';
@@ -97,32 +97,28 @@ function changeLevel(level) {
             //planks row 6
             ctx.drawImage(plankImage, 800, 170, 50, 50);
             ctx.drawImage(plankImage, 750, 170, 50, 50);
+            ctx.drawImage(plankImage, 700, 170, 50, 50);
+
+            //row 7
+            ctx.drawImage(plankImage, 550, 150, 50, 50);
+
+            // Enemy
+            ctx.drawImage(enemyImage, 1000, 510, 100, 100);
 
             // Barrelgrounds
             // Top Row
-            ctx.drawImage(barrelgroundImage, 120, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 170, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 220, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 270, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 320, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 370, 130, 50, 50);
-
-            // Row 1
-            ctx.drawImage(barrelgroundImage, 1200, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1250, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1300, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1350, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1400, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1450, 150, 50, 50);
+            ctx.drawImage(plankImage, 120, 130, 50, 50);
+            ctx.drawImage(plankImage, 170, 130, 50, 50);
+            ctx.drawImage(plankImage, 220, 130, 50, 50);
+            ctx.drawImage(plankImage, 270, 130, 50, 50);
+            ctx.drawImage(plankImage, 320, 130, 50, 50);
+            ctx.drawImage(plankImage, 370, 130, 50, 50);
 
             // Barrels
-            ctx.drawImage(barrelImage, 120, 70, 100, 100);
+            ctx.drawImage(barrelImage, 180, 10, 120, 120);
 
             // Boss
             ctx.drawImage(bossImage, 120, 40, 100, 100);
-
-            // Enemy
-            ctx.drawImage(enemyImage, 1300, 60, 100, 100);
 
             // Ladder
             ctx.drawImage(ladderImage, 400, 515, 100, 100);
