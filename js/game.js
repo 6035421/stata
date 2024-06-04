@@ -2,9 +2,10 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const startButton = document.getElementById('start');
 const startTime = performance.now();
-
 const scoreEl = document.getElementById('highscore');
 let scoreTimer, score = 0;
+let playerImage, x, y, width, height;
+let forward = null, backward = null, jumping = null;
 
 let playerImage, x, y, width, height;
 
@@ -17,7 +18,7 @@ let menu = document.getElementById('menu');
 level = 1;
 
 function changeLevel(level) {
-    window.level = level;
+    window.localStorage.level = level;
 
     initPlayer();
 
@@ -37,7 +38,7 @@ function changeLevel(level) {
         plankImage.src = '../sprite/plank-sprite.png';
 
         const barrelImage = new Image();
-        barrelImage.src = '../sprite/level1/barrel-lay.png';
+        barrelImage.src = '../sprite/level1/barrel-mop.png';
 
         const barrelgroundImage = new Image();
         barrelgroundImage.src = '../sprite/level1/barrelground.png';
@@ -95,6 +96,28 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 1225, 300, 50, 50);
 
             //planks row 5
+            ctx.drawImage(plankImage, 1000, 270, 50, 50);
+            ctx.drawImage(plankImage, 950, 270, 50, 50);
+
+            //planks row 6
+            ctx.drawImage(plankImage, 800, 170, 50, 50);
+            ctx.drawImage(plankImage, 750, 170, 50, 50);
+            ctx.drawImage(plankImage, 700, 170, 50, 50);
+
+            //row 7
+            ctx.drawImage(plankImage, 550, 150, 50, 50);
+
+            // Enemy
+            ctx.drawImage(enemyImage, 1000, 510, 100, 100);
+
+            // Barrelgrounds
+            // Top Row
+            ctx.drawImage(plankImage, 120, 130, 50, 50);
+            ctx.drawImage(plankImage, 170, 130, 50, 50);
+            ctx.drawImage(plankImage, 220, 130, 50, 50);
+            ctx.drawImage(plankImage, 270, 130, 50, 50);
+            ctx.drawImage(plankImage, 320, 130, 50, 50);
+            ctx.drawImage(plankImage, 370, 130, 50, 50);
             ctx.drawImage(plankImage, 1000, 370, 50, 50);
             ctx.drawImage(plankImage, 950, 370, 50, 50);
 
@@ -120,7 +143,7 @@ function changeLevel(level) {
             ctx.drawImage(barrelgroundImage, 1450, 150, 50, 50);
 
             // Barrels
-            ctx.drawImage(barrelImage, 120, 70, 100, 100);
+            ctx.drawImage(barrelImage, 180, 10, 120, 120);
 
             // Boss
             ctx.drawImage(bossImage, 120, 40, 100, 100);
@@ -517,3 +540,4 @@ function getCursorPosition(canvas, event) {
 canvas.addEventListener('mousedown', function (e) {
     getCursorPosition(canvas, e)
 })
+startScoreCounting();
