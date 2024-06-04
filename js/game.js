@@ -123,9 +123,6 @@ function changeLevel(level) {
             // Boss
             ctx.drawImage(bossImage, 120, 40, 100, 100);
 
-            // Enemy
-            ctx.drawImage(enemyImage, 1300, 60, 100, 100);
-
             // Ladder
             ctx.drawImage(ladderImage, 400, 515, 100, 100);
 
