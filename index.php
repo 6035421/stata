@@ -19,6 +19,7 @@
             <article id='logo'>
             <img src="/assets/images/logo.png" alt="player">
             </article>
+            <?php echo '    <h1>Welkom admin, ' . $_SESSION['gebruikersnaam'] . '</h1><br />' ?>
 
             <article id='buttons'>
         <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>

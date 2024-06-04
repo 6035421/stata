@@ -2,9 +2,10 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const startButton = document.getElementById('start');
 const startTime = performance.now();
-
 const scoreEl = document.getElementById('highscore');
 let scoreTimer, score = 0;
+let playerImage, x, y, width, height;
+let forward = null, backward = null, jumping = null;
 
 let playerImage, x, y, width, height;
 
@@ -13,7 +14,7 @@ let forward = null, backward = null, jumping = null;
 level = 1;
 
 function changeLevel(level) {
-    window.level = level;
+    window.localStorage.level = level;
 
     initPlayer();
 
@@ -113,12 +114,38 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 270, 130, 50, 50);
             ctx.drawImage(plankImage, 320, 130, 50, 50);
             ctx.drawImage(plankImage, 370, 130, 50, 50);
+            ctx.drawImage(plankImage, 1000, 370, 50, 50);
+            ctx.drawImage(plankImage, 950, 370, 50, 50);
+
+            //planks row 6
+            ctx.drawImage(plankImage, 1000, 270, 50, 50);
+            ctx.drawImage(plankImage, 950, 270, 50, 50);
+
+            // Barrelgrounds
+            // Top Row
+            ctx.drawImage(barrelgroundImage, 120, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 170, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 220, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 270, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 320, 130, 50, 50);
+            ctx.drawImage(barrelgroundImage, 370, 130, 50, 50);
+
+            // Row 1
+            ctx.drawImage(barrelgroundImage, 1200, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1250, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1300, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1350, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1400, 150, 50, 50);
+            ctx.drawImage(barrelgroundImage, 1450, 150, 50, 50);
 
             // Barrels
             ctx.drawImage(barrelImage, 180, 10, 120, 120);
 
             // Boss
             ctx.drawImage(bossImage, 120, 40, 100, 100);
+
+            // Enemy
+            ctx.drawImage(enemyImage, 1300, 60, 100, 100);
 
             // Ladder
             ctx.drawImage(ladderImage, 400, 515, 100, 100);
