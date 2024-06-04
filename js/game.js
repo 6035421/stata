@@ -7,10 +7,6 @@ let scoreTimer, score = 0;
 let playerImage, x, y, width, height;
 let forward = null, backward = null, jumping = null;
 
-let playerImage, x, y, width, height;
-
-let forward = null, backward = null, jumping = null;
-
 let interval;
 
 let menu = document.getElementById('menu');
@@ -483,26 +479,15 @@ function fall() {
         }
 
         let color = ctx.getImageData(x + 30, y - 4 + parseInt(height), 1, 1).data.join(',');
-        console.log(y + parseInt(playerImage.height))
-        let color = ctx.getImageData(x, y + 35 + parseInt(playerImage.height), 1, 1).data.join(',');
-        console.log(color)
-        console.log(color == '172,133,91,255');
-
-        document.getElementById('testDiv').style.top = y + 35 + parseInt(playerImage.height) + 'px';
-        document.getElementById('testDiv').style.left = x + 'px'
 
         if (color == '172,133,91,255') {
             clearInterval(interval);
         }
     }, 7); // 1000 voor testen
-    }, 1); // 1000 voor testen
 }
 
 function checkUnderground() {
     let color = ctx.getImageData(x + 30, y - 3 + parseInt(height), 1, 1).data.join(',');
-
-    console.log(color);
-    console.log(color == '172,133,91,255')
 
     if (color == '172,133,91,255') {} else {
         fall();
