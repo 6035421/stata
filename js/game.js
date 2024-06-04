@@ -366,7 +366,7 @@ function addControls() {
         if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null) {
             jumping = window.setInterval(function () {
                 playerImage.src = '../sprite/player-jump.png';
-                y -= 30;
+                y -= 60;
 
                 fall();
             }, 70);
@@ -482,6 +482,7 @@ function fall() {
             gameOver();
         }
 
+        let color = ctx.getImageData(x + 30, y - 4 + parseInt(height), 1, 1).data.join(',');
         console.log(y + parseInt(playerImage.height))
         let color = ctx.getImageData(x, y + 35 + parseInt(playerImage.height), 1, 1).data.join(',');
         console.log(color)
@@ -493,11 +494,19 @@ function fall() {
         if (color == '172,133,91,255') {
             clearInterval(interval);
         }
+    }, 7); // 1000 voor testen
     }, 1); // 1000 voor testen
 }
 
 function checkUnderground() {
+    let color = ctx.getImageData(x + 30, y - 3 + parseInt(height), 1, 1).data.join(',');
 
+    console.log(color);
+    console.log(color == '172,133,91,255')
+
+    if (color == '172,133,91,255') {} else {
+        fall();
+    }
 }
 
 changeLevel(level);
