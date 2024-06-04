@@ -117,27 +117,6 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 1000, 370, 50, 50);
             ctx.drawImage(plankImage, 950, 370, 50, 50);
 
-            //planks row 6
-            ctx.drawImage(plankImage, 1000, 270, 50, 50);
-            ctx.drawImage(plankImage, 950, 270, 50, 50);
-
-            // Barrelgrounds
-            // Top Row
-            ctx.drawImage(barrelgroundImage, 120, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 170, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 220, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 270, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 320, 130, 50, 50);
-            ctx.drawImage(barrelgroundImage, 370, 130, 50, 50);
-
-            // Row 1
-            ctx.drawImage(barrelgroundImage, 1200, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1250, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1300, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1350, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1400, 150, 50, 50);
-            ctx.drawImage(barrelgroundImage, 1450, 150, 50, 50);
-
             // Barrels
             ctx.drawImage(barrelImage, 180, 10, 120, 120);
 
