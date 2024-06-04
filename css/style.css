@@ -26,8 +26,7 @@ body {
 
     #start,
     #home,
-    #settings,
-    #about,
+    #restart,
     #fullscreen {
         background-color: rgb(255, 117, 117);
         color: white;
@@ -44,8 +43,7 @@ body {
 
     #start:hover,
     #home:hover,
-    #settings:hover,
-    #about:hover,
+    #restart:hover,
     #fullscreen:hover {
         background-color: rgb(255, 80, 80);
         color: white;
@@ -150,6 +148,11 @@ body {
     position: fixed;
 
     width:100%;
+}
+
+.gameOverMenu {
+    top:56%;
+    left:41%;
 }
 
 #menu .menu {

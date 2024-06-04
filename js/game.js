@@ -2,9 +2,10 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const startButton = document.getElementById('start');
 const startTime = performance.now();
-
 const scoreEl = document.getElementById('highscore');
 let scoreTimer, score = 0;
+let playerImage, x, y, width, height;
+let forward = null, backward = null, jumping = null;
 
 let playerImage, x, y, width, height;
 
@@ -12,10 +13,12 @@ let forward = null, backward = null, jumping = null;
 
 let interval;
 
+let menu = document.getElementById('menu');
+
 level = 1;
 
 function changeLevel(level) {
-    window.level = level;
+    window.localStorage.level = level;
 
     initPlayer();
 
@@ -35,7 +38,7 @@ function changeLevel(level) {
         plankImage.src = '../sprite/plank-sprite.png';
 
         const barrelImage = new Image();
-        barrelImage.src = '../sprite/level1/barrel-lay.png';
+        barrelImage.src = '../sprite/level1/barrel-mop.png';
 
         const barrelgroundImage = new Image();
         barrelgroundImage.src = '../sprite/level1/barrelground.png';
@@ -93,6 +96,28 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 1225, 300, 50, 50);
 
             //planks row 5
+            ctx.drawImage(plankImage, 1000, 270, 50, 50);
+            ctx.drawImage(plankImage, 950, 270, 50, 50);
+
+            //planks row 6
+            ctx.drawImage(plankImage, 800, 170, 50, 50);
+            ctx.drawImage(plankImage, 750, 170, 50, 50);
+            ctx.drawImage(plankImage, 700, 170, 50, 50);
+
+            //row 7
+            ctx.drawImage(plankImage, 550, 150, 50, 50);
+
+            // Enemy
+            ctx.drawImage(enemyImage, 1000, 510, 100, 100);
+
+            // Barrelgrounds
+            // Top Row
+            ctx.drawImage(plankImage, 120, 130, 50, 50);
+            ctx.drawImage(plankImage, 170, 130, 50, 50);
+            ctx.drawImage(plankImage, 220, 130, 50, 50);
+            ctx.drawImage(plankImage, 270, 130, 50, 50);
+            ctx.drawImage(plankImage, 320, 130, 50, 50);
+            ctx.drawImage(plankImage, 370, 130, 50, 50);
             ctx.drawImage(plankImage, 1000, 370, 50, 50);
             ctx.drawImage(plankImage, 950, 370, 50, 50);
 
@@ -118,7 +143,7 @@ function changeLevel(level) {
             ctx.drawImage(barrelgroundImage, 1450, 150, 50, 50);
 
             // Barrels
-            ctx.drawImage(barrelImage, 120, 70, 100, 100);
+            ctx.drawImage(barrelImage, 180, 10, 120, 120);
 
             // Boss
             ctx.drawImage(bossImage, 120, 40, 100, 100);
@@ -264,6 +289,8 @@ function changeLevel(level) {
 // Start button
 startButton.addEventListener('click', function () {
     if (startButton.textContent === '▶') {
+        menu.classList.remove('gameOverMenu');
+
         startScoreCounting();
 
         startButton.textContent = '❚❚';
@@ -281,7 +308,10 @@ startButton.addEventListener('click', function () {
 
         changeLevel(level);
     } else {
+        menu.classList.add('gameOverMenu');
+
         cancelScoreCounting();
+        clearInterval(interval);
 
         startButton.textContent = '▶';
         const ctx = gameCanvas.getContext('2d');
@@ -294,26 +324,8 @@ startButton.addEventListener('click', function () {
         ctx.font = '15px Arial';
         ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
         // When paused the player can't move
-        document.removeEventListener('keydown', function (event) {
-            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 20;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 20;
-                }, 500);
-            }
 
-            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
-                playerImage.src = '../sprite/player-right.png';
-                x += 10;
-            }
-
-            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
-                playerImage.src = '../sprite/player-left.png';
-                x -= 10;
-            }
-        });
+        removeControls();
     }
 });
 
@@ -390,6 +402,64 @@ function addControls() {
     });
 }
 
+function removeControls() {
+    document.removeEventListener('keyup', function (event) {
+        if (event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') {
+            clearInterval(jumping);
+            jumping = null;
+        }
+
+        if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+            clearInterval(forward);
+            forward = null;
+        }
+
+        if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+            clearInterval(backward);
+            backward = null;
+        }
+    });
+
+    document.removeEventListener('keydown', function (event) {
+        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null) {
+            jumping = window.setInterval(function () {
+                playerImage.src = '../sprite/player-jump.png';
+                y -= 30;
+
+                fall();
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
+            forward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-right.png';
+
+                if (x > (window.innerWidth - 75)) {
+                    return;
+                }
+
+                checkUnderground();
+                x += 10;
+
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowLeft' || event.code === 'KeyA') && backward === null) {
+            backward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-left.png';
+
+                if (x === -10) {
+                    return;
+                }
+
+                checkUnderground();
+                x -= 10;
+
+            }, 70);
+        }
+    });
+}
+
 function initPlayer() {
     x = 100;
     y = 503;
@@ -408,14 +478,24 @@ function fall() {
         playerImage.src = '../sprite/player-normal.png';
         y += 1;
 
-        checkDeath();
+        if (checkDeath()) {
+            gameOver();
+        }
 
         let color = ctx.getImageData(x + 30, y - 4 + parseInt(height), 1, 1).data.join(',');
+        console.log(y + parseInt(playerImage.height))
+        let color = ctx.getImageData(x, y + 35 + parseInt(playerImage.height), 1, 1).data.join(',');
+        console.log(color)
+        console.log(color == '172,133,91,255');
+
+        document.getElementById('testDiv').style.top = y + 35 + parseInt(playerImage.height) + 'px';
+        document.getElementById('testDiv').style.left = x + 'px'
 
         if (color == '172,133,91,255') {
             clearInterval(interval);
         }
     }, 7); // 1000 voor testen
+    }, 1); // 1000 voor testen
 }
 
 function checkUnderground() {
@@ -433,13 +513,29 @@ changeLevel(level);
 startScoreCounting();
 
 function checkDeath() {
-    if(y > (window.innerHeight - 65)) {
-        gameOver();
-    }
+    return y > (window.innerHeight - 65);
 }
 
-function gameOver () {
+function gameOver() {
+    cancelScoreCounting();
+    clearInterval(interval);
 
+    menu.classList.add('gameOverMenu');
+
+    window.setTimeout(function () { // for some reason this needs to be delayed, couldnt find why
+        const ctx = gameCanvas.getContext('2d');
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+        ctx.fillStyle = 'white';
+        ctx.font = '50px Arial';
+        ctx.fillText('GAME OVER', gameCanvas.width / 2 - 150, gameCanvas.height / 2);
+
+        ctx.font = '15px Arial';
+        ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        // When paused the player can't move
+
+        removeControls();
+    }, 10);
 }
 
 function getCursorPosition(canvas, event) {
@@ -453,3 +549,4 @@ function getCursorPosition(canvas, event) {
 canvas.addEventListener('mousedown', function (e) {
     getCursorPosition(canvas, e)
 })
+startScoreCounting();

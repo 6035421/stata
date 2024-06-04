@@ -20,10 +20,9 @@
             <article class="menu">
                 <img src="/sprite/player.gif" alt="player">
                 <button class='pixel-corners' id="start">❚❚</button>
-                <button class='pixel-corners' id="home">Home</button>
-                <button class='pixel-corners' id="settings">Settings</button>
-                <button class='pixel-corners' id="about">About</button>
-                <button class='pixel-corners' id="fullscreen">Fullscreen</button>
+                <button class='pixel-corners' id="home">⌂</button>
+                <button class='pixel-corners' id="restart">↺</button>
+                <button class='pixel-corners' id="fullscreen">⛶</button>
 
                 <p id='highscore'></p>
             </article>

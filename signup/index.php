@@ -1,5 +1,5 @@
 <?php
-include './database/connect.php';
+include '../database/connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['gebruikersnaam'];
@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO admin (gebruikersnaam, wachtwoord) VALUES ('$username', '$hashed_password')";
+    $sql = "INSERT INTO gebruikers (gebruikersnaam, wachtwoord) VALUES ('$username', '$hashed_password')";
 
     if ($conn->query($sql) === TRUE) {
         echo "User registered successfully";
