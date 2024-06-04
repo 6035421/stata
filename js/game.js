@@ -11,6 +11,10 @@ let playerImage, x, y, width, height;
 
 let forward = null, backward = null, jumping = null;
 
+let interval;
+
+let menu = document.getElementById('menu');
+
 level = 1;
 
 function changeLevel(level) {
@@ -192,8 +196,6 @@ function changeLevel(level) {
     if (level === 2) {
         let x = 400;
         let y = 410;
-        const width = 100;
-        const height = 100;
         const startTime = performance.now();
         // Clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -241,8 +243,6 @@ function changeLevel(level) {
     if (level === 3) {
         let x = 100;
         let y = 100;
-        const width = 100;
-        const height = 100;
         const startTime = performance.now();
         // Clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -289,6 +289,8 @@ function changeLevel(level) {
 // Start button
 startButton.addEventListener('click', function () {
     if (startButton.textContent === '▶') {
+        menu.classList.remove('gameOverMenu');
+
         startScoreCounting();
 
         startButton.textContent = '❚❚';
@@ -306,7 +308,10 @@ startButton.addEventListener('click', function () {
 
         changeLevel(level);
     } else {
+        menu.classList.add('gameOverMenu');
+
         cancelScoreCounting();
+        clearInterval(interval);
 
         startButton.textContent = '▶';
         const ctx = gameCanvas.getContext('2d');
@@ -319,26 +324,8 @@ startButton.addEventListener('click', function () {
         ctx.font = '15px Arial';
         ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
         // When paused the player can't move
-        document.removeEventListener('keydown', function (event) {
-            if (event.code === 'KeyW' || event.code === 'ArrowUp') {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 20;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 20;
-                }, 500);
-            }
 
-            if (event.code === 'ArrowRight' || event.code === 'KeyD') {
-                playerImage.src = '../sprite/player-right.png';
-                x += 10;
-            }
-
-            if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
-                playerImage.src = '../sprite/player-left.png';
-                x -= 10;
-            }
-        });
+        removeControls();
     }
 });
 
@@ -380,16 +367,20 @@ function addControls() {
             jumping = window.setInterval(function () {
                 playerImage.src = '../sprite/player-jump.png';
                 y -= 30;
-                setTimeout(function () {
-                    playerImage.src = '../sprite/player-normal.png';
-                    y += 30;
-                }, 450);
+
+                fall();
             }, 70);
         }
 
         if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
             forward = window.setInterval(function () {
                 playerImage.src = '../sprite/player-right.png';
+
+                if (x > (window.innerWidth - 75)) {
+                    return;
+                }
+
+                checkUnderground();
                 x += 10;
 
             }, 70);
@@ -398,6 +389,70 @@ function addControls() {
         if ((event.code === 'ArrowLeft' || event.code === 'KeyA') && backward === null) {
             backward = window.setInterval(function () {
                 playerImage.src = '../sprite/player-left.png';
+
+                if (x === -10) {
+                    return;
+                }
+
+                checkUnderground();
+                x -= 10;
+
+            }, 70);
+        }
+    });
+}
+
+function removeControls() {
+    document.removeEventListener('keyup', function (event) {
+        if (event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') {
+            clearInterval(jumping);
+            jumping = null;
+        }
+
+        if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+            clearInterval(forward);
+            forward = null;
+        }
+
+        if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+            clearInterval(backward);
+            backward = null;
+        }
+    });
+
+    document.removeEventListener('keydown', function (event) {
+        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null) {
+            jumping = window.setInterval(function () {
+                playerImage.src = '../sprite/player-jump.png';
+                y -= 30;
+
+                fall();
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
+            forward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-right.png';
+
+                if (x > (window.innerWidth - 75)) {
+                    return;
+                }
+
+                checkUnderground();
+                x += 10;
+
+            }, 70);
+        }
+
+        if ((event.code === 'ArrowLeft' || event.code === 'KeyA') && backward === null) {
+            backward = window.setInterval(function () {
+                playerImage.src = '../sprite/player-left.png';
+
+                if (x === -10) {
+                    return;
+                }
+
+                checkUnderground();
                 x -= 10;
 
             }, 70);
@@ -417,5 +472,72 @@ function initPlayer() {
     addControls();
 }
 
+function fall() {
+    clearInterval(interval);
+    interval = setInterval(function () {
+        playerImage.src = '../sprite/player-normal.png';
+        y += 1;
+
+        if (checkDeath()) {
+            gameOver();
+        }
+
+        console.log(y + parseInt(playerImage.height))
+        let color = ctx.getImageData(x, y + 35 + parseInt(playerImage.height), 1, 1).data.join(',');
+        console.log(color)
+        console.log(color == '172,133,91,255');
+
+        document.getElementById('testDiv').style.top = y + 35 + parseInt(playerImage.height) + 'px';
+        document.getElementById('testDiv').style.left = x + 'px'
+
+        if (color == '172,133,91,255') {
+            clearInterval(interval);
+        }
+    }, 1); // 1000 voor testen
+}
+
+function checkUnderground() {
+
+}
+
 changeLevel(level);
+startScoreCounting();
+
+function checkDeath() {
+    return y > (window.innerHeight - 65);
+}
+
+function gameOver() {
+    cancelScoreCounting();
+    clearInterval(interval);
+
+    menu.classList.add('gameOverMenu');
+
+    window.setTimeout(function () { // for some reason this needs to be delayed, couldnt find why
+        const ctx = gameCanvas.getContext('2d');
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+        ctx.fillStyle = 'white';
+        ctx.font = '50px Arial';
+        ctx.fillText('GAME OVER', gameCanvas.width / 2 - 150, gameCanvas.height / 2);
+
+        ctx.font = '15px Arial';
+        ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        // When paused the player can't move
+
+        removeControls();
+    }, 10);
+}
+
+function getCursorPosition(canvas, event) {
+    const rect = canvas.getBoundingClientRect()
+    const xx = event.clientX - rect.left
+    const xy = event.clientY - rect.top
+    console.log("x: " + xx + " y: " + xy)
+    console.log("x: " + x + " y: " + y)
+}
+
+canvas.addEventListener('mousedown', function (e) {
+    getCursorPosition(canvas, e)
+})
 startScoreCounting();
