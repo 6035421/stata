@@ -167,3 +167,12 @@ body {
     max-height: 39px;
     min-height: 39px;
 }
+
+/* Profile */
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+}

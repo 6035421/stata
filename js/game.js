@@ -7,10 +7,6 @@ let scoreTimer, score = 0;
 let playerImage, x, y, width, height;
 let forward = null, backward = null, jumping = null;
 
-let playerImage, x, y, width, height;
-
-let forward = null, backward = null, jumping = null;
-
 let interval;
 
 let menu = document.getElementById('menu');
