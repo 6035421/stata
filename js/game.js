@@ -471,7 +471,7 @@ function initPlayer() {
 function fall() {
     clearInterval(interval);
     interval = setInterval(function () {
-        playerImage.src = '../sprite/player-normal.png';
+        playerImage.src = '../sprite/player-jump.png';
         y += 1;
 
         if (checkDeath()) {
@@ -482,6 +482,7 @@ function fall() {
 
         if (color == '172,133,91,255') {
             clearInterval(interval);
+            playerImage.src = '../sprite/player-normal.png';
         }
     }, 7); // 1000 voor testen
 }
