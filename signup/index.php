@@ -8,15 +8,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO gebruikers (gebruikersnaam, wachtwoord) VALUES ('$username', '$hashed_password')";
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("INSERT INTO gebruikers (gebruikersnaam, wachtwoord) VALUES (?, ?)");
+    $stmt->bind_param("ss", $username, $hashed_password);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         echo "User registered successfully";
-
-        $conn->query($update_sql);
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmt->error;
     }
+
+    $stmt->close();
 }
 ?>
 <!DOCTYPE html>
@@ -28,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <h2>Sign Up</h2>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        Username: <input type="text" name="gebruikersnaam"><br>
-        Password: <input type="password" name="wachtwoord"><br>
+        Username: <input type="text" name="gebruikersnaam" required><br>
+        Password: <input type="password" name="wachtwoord" required><br>
         <input type="submit" value="Sign Up">
     </form>
 </body>

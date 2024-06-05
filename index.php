@@ -1,3 +1,18 @@
+<?php
+session_start();
+include './database/connect.php';
+
+// Initialize $gebruikersnaam from session
+$gebruikersnaam = isset($_SESSION['gebruikersnaam']) ? $_SESSION['gebruikersnaam'] : '';
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: /login/index.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,29 +25,37 @@
 <body>
     <!-- Header -->
     <header>
-
     </header>
 
     <!-- Main -->
     <main class='HomeMenuList'>
         <section>
             <article id='logo'>
-            <img src="/assets/images/logo.png" alt="player">
+                <img src="/assets/images/logo.png" alt="player">
             </article>
-            <?php echo '    <h1>Welkom admin, ' . $_SESSION['gebruikersnaam'] . '</h1><br />' ?>
+            <?php
+            if (!empty($gebruikersnaam)) {
+                echo '<h1 class="welkom">Welkom, ' . htmlspecialchars($gebruikersnaam) . '</h1><br />';
 
+                echo '<form method="post">
+                <button type="submit" name="logout" class="logout-link"">Logout</button>
+            </form>';
+            } else {
+                echo '<h1>Welkom, gast</h1><br />';
+            }
+            ?>
+            
             <article id='buttons'>
-        <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>
-        <a class='pixel-corners' id='vrienden' href='./vrienden.php'>Vrienden</a>
-        <a class='pixel-corners' id='account' href='./profile.php'>Account</a>
-        </article>
-</section>
+                <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>
+                <a class='pixel-corners' id='vrienden' href='./vrienden.php'>Vrienden</a>
+                <a class='pixel-corners' id='account' href='./profile.php'>Account</a>
+            </article>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer>
-
     </footer>
 </body>
-    <script src="/js/menu.js"></script>
+<script src="/js/menu.js"></script>
 </html>

@@ -6,15 +6,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['gebruikersnaam'];
     $password = $_POST['wachtwoord'];
 
-    $sql = "SELECT * FROM gebruikers WHERE gebruikersnaam ='$username'";
-    $result = $conn->query($sql);
+    // Use prepared statements to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM gebruikers WHERE gebruikersnaam = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
+        // Verify the hashed password
         if (password_verify($password, $row['wachtwoord'])) {
-            session_start(); // Start the session
-            $_SESSION['id'] = $row['id']; // Store user ID in session
-            header("Location: home.php"); // Redirect to home page
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['gebruikersnaam'] = $row['gebruikersnaam'];
+            header("Location: /index.php");
             exit();
         } else {
             echo "Invalid username or password";
@@ -22,19 +26,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Invalid username or password";
     }
+
+    $stmt->close();
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/images/New Piskel.png">
 </head>
 <body>
     <h2>Login</h2>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        Username: <input type="text" name="gebruikersnaam"><br>
-        Password: <input type="password" name="wachtwoord"><br>
+        Username: <input type="text" name="gebruikersnaam" required><br>
+        Password: <input type="password" name="wachtwoord" required><br>
         <input type="submit" value="Login">
     </form>
 </body>
