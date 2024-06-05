@@ -27,7 +27,7 @@
                 <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>
 
                 <?php
-        if(isset($_SESSION['password'])) {
+        if(isset($_SESSION['id'])) {
             echo "<a class='pixel-corners' id='vrienden' href='./vrienden.php'>Vrienden</a>";
             echo "<a class='pixel-corners' id='account' href='./profile.php'>Account</a>";
         } else {
