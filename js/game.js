@@ -4,7 +4,7 @@ const startButton = document.getElementById('start');
 const startTime = performance.now();
 const scoreEl = document.getElementById('highscore');
 let scoreTimer, score = 0;
-let playerImage, x, y, width, height;
+let playerImage, x, y, width, height, enemyX, enemeyY;
 let forward = null, backward = null, jumping = null;
 
 let interval;
@@ -16,7 +16,7 @@ level = 1;
 function changeLevel(level) {
     window.localStorage.level = level;
 
-    initPlayer();
+    initialize();
 
     if (level === 1) {
         console.log('Level 1');
@@ -104,7 +104,7 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 550, 150, 50, 50);
 
             // Enemy
-            ctx.drawImage(enemyImage, 1000, 510, 100, 100);
+            ctx.drawImage(enemyImage, enemyX, enemyY, width, height);
 
             // Barrelgrounds
             // Top Row
@@ -410,6 +410,11 @@ function removeControls() {
                     return;
                 }
 
+                if(checkDeathByEnemy()) {
+                    clearInterval(forward);
+                    gameOver();
+                }
+
                 checkUnderground();
                 x += 10;
 
@@ -424,6 +429,11 @@ function removeControls() {
                     return;
                 }
 
+                if(checkDeathByEnemy()) {
+                    clearInterval(backward);
+                    gameOver();
+                }
+
                 checkUnderground();
                 x -= 10;
 
@@ -432,9 +442,12 @@ function removeControls() {
     });
 }
 
-function initPlayer() {
+function initialize() {
     x = 100;
     y = 503;
+    enemyX = 1000;
+    enemyY = 510;
+
     width = 100;
     height = 100;
 
@@ -475,7 +488,20 @@ changeLevel(level);
 startScoreCounting();
 
 function checkDeath() {
-    return y > (window.innerHeight - 65);
+    return (y > (window.innerHeight - 65));
+}
+
+function checkDeathByEnemy() {
+    return isCollide();
+}
+
+function isCollide() {
+    return !(
+        ((y + height) < enemyY) ||
+        (y > (enemyY + height)) ||
+        ((x + width) < enemyX) ||
+        (x > (enemyX + width))
+    );
 }
 
 function gameOver() {
@@ -494,8 +520,11 @@ function gameOver() {
 
         ctx.font = '15px Arial';
         ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        ctx.fillText(`Score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
         // When paused the player can't move
+        startButton.textContent = '▶';
 
+        // When paused the player can't move
         removeControls();
     }, 10);
 }
@@ -510,5 +539,6 @@ function getCursorPosition(canvas, event) {
 
 canvas.addEventListener('mousedown', function (e) {
     getCursorPosition(canvas, e)
-})
+});
+
 startScoreCounting();

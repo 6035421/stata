@@ -15,6 +15,7 @@ if (isset($_POST['logout'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +23,7 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="../assets/images/New Piskel.png">
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -47,8 +49,17 @@ if (isset($_POST['logout'])) {
             
             <article id='buttons'>
                 <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>
-                <a class='pixel-corners' id='vrienden' href='./vrienden.php'>Vrienden</a>
-                <a class='pixel-corners' id='account' href='./profile.php'>Account</a>
+
+                <?php
+        if(isset($_SESSION['id'])) {
+            echo "<a class='pixel-corners' id='vrienden' href='./vrienden.php'>Vrienden</a>";
+            echo "<a class='pixel-corners' id='account' href='./profile.php'>Account</a>";
+        } else {
+            echo "<a class='pixel-corners' id='vrienden' disabled href='./login/index.php'>Vrienden</a>";
+            echo "<a class='pixel-corners' id='account' href='./login/index.php'>Account</a>";
+        }
+        ?>
+
             </article>
         </section>
     </main>
