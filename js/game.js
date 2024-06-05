@@ -520,6 +520,9 @@ function gameOver() {
 
         ctx.font = '15px Arial';
         ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        ctx.fillText(`Score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        // When paused the player can't move
+        startButton.textContent = '▶';
 
         // When paused the player can't move
         removeControls();
