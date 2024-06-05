@@ -230,3 +230,11 @@ main {
 .selected {
     background-color: rgb(173, 172, 172) !important;
 }
+
+.welkom {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
