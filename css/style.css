@@ -176,3 +176,57 @@ body {
     justify-content: center;
     margin-top: 10%;
 }
+
+.vrienden {
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    row-gap:8px;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width:100%;
+    height:100%;
+}
+
+.buttons {
+    width:60%;
+    padding:8px;
+
+    background-color: rgb(255, 117, 117);
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.buttons * {
+    width:100%;
+
+    border-width:0px;
+
+    padding:5px;
+}
+
+.buttons input {
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.friends {
+    display:flex;
+    flex-direction: row;
+    column-gap:8px;
+}
+
+.selected {
+    background-color: rgb(173, 172, 172) !important;
+}
