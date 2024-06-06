@@ -43,7 +43,7 @@ if (isset($_POST['logout'])) {
                 <button type="submit" name="logout" class="logout-link"">Logout</button>
             </form>';
             } else {
-                echo '<h1>Welkom, gast</h1><br />';
+                echo '<h1 class="gast">Welkom, gast</h1><br />';
             }
             ?>
             
