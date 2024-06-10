@@ -2,7 +2,6 @@
 session_start();
 include './database/connect.php';
 
-// Initialize $gebruikersnaam from session
 $gebruikersnaam = isset($_SESSION['gebruikersnaam']) ? $_SESSION['gebruikersnaam'] : '';
 
 if (isset($_POST['logout'])) {
