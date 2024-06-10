@@ -1,15 +1,13 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const startButton = document.getElementById('start');
-const startTime = performance.now();
 const scoreEl = document.getElementById('highscore');
+const startTime = performance.now();
+let menu = document.getElementById('menu');
 let scoreTimer, score = 0;
 let playerImage, x, y, width, height, enemyX, enemeyY;
 let forward = null, backward = null, jumping = null;
-
 let interval;
-
-let menu = document.getElementById('menu');
 
 level = 1;
 
@@ -274,6 +272,7 @@ startButton.addEventListener('click', function () {
         const backgroundImage = new Image();
         backgroundImage.src = '../assets/images/classroom.jpeg';
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+        
         backgroundImage.onload = function () {
             draw();
         };
