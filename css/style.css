@@ -225,6 +225,8 @@ main {
     display:flex;
     flex-direction: row;
     column-gap:8px;
+
+    margin-bottom:8px;
 }
 
 .selected {
@@ -237,4 +239,54 @@ main {
     display: flex;
     flex-direction: column;
     color: white;
+}
+
+.friendListItem img{
+    width:50px;
+    height:50px;
+
+    border-radius:200px;
+
+    padding:0px;
+
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.friendListItem {
+    display:flex;
+    flex-direction:row;
+
+    padding:0px;
+
+    width:100%;
+}
+
+.friendListItem h2, .friendListItem p {
+    width:max-content;
+
+    margin:0px;
+    padding-top:0px;
+}
+
+.friendListItem article {
+    padding:0px;
+}
+
+#onlineLijst {
+    display:none;
+
+    width:100%;
+}
+
+#vriendenLijst {
+    width:100%;
+}
+
+.width60 {
+    width: calc(60% + 16px);
+}
+
+.w100 {
+    width:calc(100% - 16px);
 }

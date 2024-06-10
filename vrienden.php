@@ -1,5 +1,6 @@
 <?php 
 include './database/connect.php'; 
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +15,7 @@ include './database/connect.php';
 </head>
 
 <body>
+
     <main>
         <section class='vrienden'>
             <article class='pixel-corners buttons'>
@@ -21,12 +23,13 @@ include './database/connect.php';
             </article>
 
             <article class='pixel-corners buttons friends'>
-                <button class='pixel-corners selected' id='mijnVrienden'>Mijn Vrienden - 0</button>
-                <button class='pixel-corners' id='zoekVrienden'>Zoek Vrienden - 2</button>
+                <button class='pixel-corners selected' id='mijnVrienden'>Mijn Vrienden</button>
+                <button class='pixel-corners' id='zoekVrienden'>Zoek Vrienden</button>
             </article>
 
-            <article class='pixel-corners'>
-                <?php
+            <article class='pixel-corners width60'>
+                <article id='vriendenLijst'>
+                    <?php
                 if(isset($_SESSION['id'])) {
                     $sql = "SELECT * FROM gebruikers WHERE id =".$_SESSION['id'];
 $result = $conn->query($sql);
@@ -36,15 +39,59 @@ if ($result->num_rows == 1) {
 
     echo $row['vrienden'];
     if($row['vrienden'] == NULL){
-        echo 'hi';
+        echo 'Oh nee, je hebt geen vrienden 🥲 druk op Zoek Vrienden om sociaal te zijn.';
+    } else {
+        foreach($result as $i) {
+            echo '<article class="pixel-corners buttons friends w100">
+            <article class="friendListItem">
+                <img src='.$i['foto'].'></img>
+                <article>
+                    <h2>'.$i['gebruikersnaam'].'</h2>
+                    <p>'.$i['id'].'</p>
+                </article>
+            </article>
+        </article>';
+    }
     }
                 }
             }
                 ?>
+                </article>
+
+                <article id='onlineLijst'>
+                    <?php
+                    $sql = "SELECT * FROM gebruikers";
+$result = $conn->query($sql);
+
+        foreach($result as $i) {
+            echo '<article class="pixel-corners buttons friends w100">
+            <article class="friendListItem">
+                <img src='.$i['foto'].'></img>
+                <article>
+                    <h2>'.$i['gebruikersnaam'].'</h2>
+                    <p>'.$i['id'].'</p>
+                </article>
+            </article>
+        </article>';
+    }
+                ?>
+                </article>
+
             </article>
             <section>
     </main>
 </body>
 <script src="/js/menu.js"></script>
+<script src="/js/vrienden.js"></script>
 
 </html>
+
+<!--         <article class='pixel-corners buttons friends'>
+            <article class='friendListItem'>
+                <img src='../assets/images/arcade.png'></img>
+                <article>
+                    <h2>eeeeee</h2>
+                    <p>eeeeeeeeeeee</p>
+                </article>
+            </article>
+        </article> -->
