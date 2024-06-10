@@ -44,5 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Password: <input type="password" name="wachtwoord" required><br>
         <input type="submit" value="Login">
     </form>
+
+    <a href='../signup/index.php'>Sign-Up Instead</a>
 </body>
 </html>
