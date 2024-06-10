@@ -178,7 +178,64 @@ body {
 }
 
 .welkom,
-.gast {
+.gast,
+.vrienden {
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    row-gap:8px;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width:100%;
+    height:100%;
+}
+
+.buttons {
+    width:60%;
+    padding:8px;
+
+    background-color: rgb(255, 117, 117);
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.buttons * {
+    width:100%;
+
+    border-width:0px;
+
+    padding:5px;
+}
+
+.buttons input {
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.friends {
+    display:flex;
+    flex-direction: row;
+    column-gap:8px;
+
+    margin-bottom:8px;
+}
+
+.selected {
+    background-color: rgb(173, 172, 172) !important;
+}
+
+.welkom {
     align-items: center;
     justify-content: center;
     display: flex;
@@ -186,4 +243,54 @@ body {
     color: white;
     font-size: 20px;
     font-family: 'pixelFont';
+}
+
+.friendListItem img{
+    width:50px;
+    height:50px;
+
+    border-radius:200px;
+
+    padding:0px;
+
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.friendListItem {
+    display:flex;
+    flex-direction:row;
+
+    padding:0px;
+
+    width:100%;
+}
+
+.friendListItem h2, .friendListItem p {
+    width:max-content;
+
+    margin:0px;
+    padding-top:0px;
+}
+
+.friendListItem article {
+    padding:0px;
+}
+
+#onlineLijst {
+    display:none;
+
+    width:100%;
+}
+
+#vriendenLijst {
+    width:100%;
+}
+
+.width60 {
+    width: calc(60% + 16px);
+}
+
+.w100 {
+    width:calc(100% - 16px);
 }
