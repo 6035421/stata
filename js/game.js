@@ -51,6 +51,9 @@ function changeLevel(level) {
         const ladderImage = new Image();
         ladderImage.src = '../sprite/ladder.png';
 
+        const ladderExtensionImage = new Image();
+        ladderExtensionImage.src = '../sprite/ladder2.png';
+
         function draw() {
             // Clear the canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -73,6 +76,10 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 525, 470, 50, 50);
             ctx.drawImage(plankImage, 575, 470, 50, 50);
 
+            // lader for row 2 
+            ctx.drawImage(ladderImage, 400, 515, 100, 100);
+            ctx.drawImage(ladderExtensionImage, 400, 450, 100, 70);
+
             //planks row 3
             ctx.drawImage(plankImage, 1000, 600, 50, 50);
             ctx.drawImage(plankImage, 1050, 600, 50, 50);
@@ -81,11 +88,6 @@ function changeLevel(level) {
             ctx.drawImage(plankImage, 1200, 600, 50, 50);
             ctx.drawImage(plankImage, 1250, 600, 50, 50);
             ctx.drawImage(plankImage, 1300, 600, 50, 50);
-
-            //ladder row 3
-            ctx.drawImage(ladderImage, 1250, 515, 100, 100);
-            ctx.drawImage(ladderImage, 1250, 430, 100, 100);
-            ctx.drawImage(ladderImage, 1250, 345, 100, 100);
 
             //planks row 4
             ctx.drawImage(plankImage, 1275, 300, 50, 50);
@@ -106,6 +108,13 @@ function changeLevel(level) {
             // Enemy
             ctx.drawImage(enemyImage, enemyX, enemyY, width, height);
 
+            //ladder row 3
+            ctx.drawImage(ladderImage, 1250, 515, 100, 100);
+            ctx.drawImage(ladderExtensionImage, 1250, 450, 100, 70);
+            ctx.drawImage(ladderExtensionImage, 1250, 385, 100, 70);
+            ctx.drawImage(ladderExtensionImage, 1250, 320, 100, 70);
+            ctx.drawImage(ladderExtensionImage, 1250, 270, 100, 70);
+
             // Barrelgrounds
             // Top Row
             ctx.drawImage(plankImage, 120, 130, 50, 50);
@@ -122,9 +131,6 @@ function changeLevel(level) {
 
             // Boss
             ctx.drawImage(bossImage, 120, 40, 100, 100);
-
-            // Ladder
-            ctx.drawImage(ladderImage, 400, 515, 100, 100);
 
             // Player
             ctx.drawImage(playerImage, x, y, width, height);
@@ -335,13 +341,12 @@ function addControls() {
     });
 
     document.addEventListener('keydown', function (event) {
-        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null) {
-            jumping = window.setInterval(function () {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 60;
+        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null && checkUnderground()) {
+            jumping = 'l';
+            playerImage.src = '../sprite/player-jump.png';
+            y -= 50;
 
-                fall();
-            }, 70);
+            fall();
         }
 
         if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
@@ -393,13 +398,12 @@ function removeControls() {
     });
 
     document.removeEventListener('keydown', function (event) {
-        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null) {
-            jumping = window.setInterval(function () {
-                playerImage.src = '../sprite/player-jump.png';
-                y -= 30;
+        if ((event.code === 'KeyW' || event.code === 'ArrowUp' || event.code === 'Space') && jumping === null && checkUnderground()) {
+            jumping = 'l';
+            playerImage.src = '../sprite/player-jump.png';
+            y -= 50;
 
-                fall();
-            }, 70);
+            fall();
         }
 
         if ((event.code === 'ArrowRight' || event.code === 'KeyD') && forward === null) {
@@ -410,7 +414,7 @@ function removeControls() {
                     return;
                 }
 
-                if(checkDeathByEnemy()) {
+                if (checkDeathByEnemy()) {
                     clearInterval(forward);
                     gameOver();
                 }
@@ -429,7 +433,7 @@ function removeControls() {
                     return;
                 }
 
-                if(checkDeathByEnemy()) {
+                if (checkDeathByEnemy()) {
                     clearInterval(backward);
                     gameOver();
                 }
@@ -482,6 +486,8 @@ function checkUnderground() {
     if (color == '172,133,91,255') {} else {
         fall();
     }
+
+    return color == '172,133,91,255'; // returns true if it's touching the planks
 }
 
 changeLevel(level);
