@@ -12,6 +12,14 @@ home.onclick = function () {
     window.location.href = '../index.php';
 }
 
+body.addEventListener('fullscreenchange', function () {
+    if(fullscreenButton.innerHTML == '✖') {
+        fullscreenButton.innerHTML = '⛶';
+} else {
+    fullscreenButton.innerHTML = '✖';
+}
+});
+
 fullscreenButton.addEventListener("click", () => {
     if(fullscreenButton.innerHTML == '⛶') {
         fullscreenButton.innerHTML = '✖ ';
