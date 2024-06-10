@@ -13,6 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ss", $username, $hashed_password);
 
     if ($stmt->execute()) {
+        echo '<article class="pixel-corners buttons friends w100">
+        <article class="friendListItem">
+            <img src='.$i['foto'].'></img>
+            <article>
+                <h2>Badge granted: '.$gebruikersnaam.'</h2>
+            </article>
+        </article>
+    </article>';
+
         echo "User registered successfully";
     } else {
         echo "Error: " . $stmt->error;
