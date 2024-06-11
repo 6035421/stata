@@ -294,3 +294,17 @@ main {
 .w100 {
     width:calc(100% - 16px);
 }
+
+.heightMax {
+    height:max-content;
+}
+
+.badges {
+    position:fixed;
+    right:8px;
+    top:8px;
+}
+
+.widthMax {
+    width:max-content;
+}
