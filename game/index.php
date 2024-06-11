@@ -37,6 +37,12 @@
         </section>
     </main>
 
+    <div id='glitch'>
+        <div id='GlitchTrap'>
+            
+        </div>
+    </div>
+
     <div id='testDiv'></div>
 
     <!-- footer -->
