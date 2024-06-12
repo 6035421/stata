@@ -78,7 +78,12 @@ function changeLevel(level) {
             ctx.drawImage(ladderImage, 400, 515, 100, 100);
             ctx.drawImage(ladderExtensionImage, 400, 450, 100, 70);
 
+            // between row 2 and 3
+            ctx.drawImage(plankImage, 700, 490, 50, 50);
+
             //planks row 3
+            ctx.drawImage(plankImage, 900, 600, 50, 50);
+            ctx.drawImage(plankImage, 950, 600, 50, 50);
             ctx.drawImage(plankImage, 1000, 600, 50, 50);
             ctx.drawImage(plankImage, 1050, 600, 50, 50);
             ctx.drawImage(plankImage, 1100, 600, 50, 50);
@@ -261,6 +266,21 @@ function changeLevel(level) {
         console.log(`Level 3 geladen in ${loadTime} milliseconden`);
     }
 };
+// enemyXmove, enemyYmove variables
+let enemyXmove = 1;
+let enemyYmove = 1;
+
+// enemy ai movement (enemyXmove, enemyYmove)
+function enemyAI() {
+    if (enemyX > 1000) {
+        enemyXmove = -1;
+    }
+    if (enemyX < 100) {
+        enemyXmove = 1;
+    }
+    enemyX += enemyXmove;
+}
+
 
 // Start button
 startButton.addEventListener('click', function () {
