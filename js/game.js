@@ -324,7 +324,7 @@ function startScoreCounting() {
         score += 0.01;
         scoreEl.innerHTML = `Score: ${score.toFixed(3)}`;
 
-        if( score > 200) {
+        if( score > 200 && score < 201) {
             startCorruption();
         }
     }, 1);
@@ -545,13 +545,10 @@ function gameOver() {
 function startCorruption () {
     glitch.classList.add('fadeIn');
 
-    glitch.addEventListener('animationend', function () {
-        window.location.reload();
-    });
-
-    window.setInterval(function () {
-        
-    },1);
+    window.setTimeout(function () { // use timeout to wait till animation finishes animationend hangs and crashes browser
+        window.location.href = `${window.location.href}?easteregg=true`;
+        //window.location.reload();
+    },119000);
 }
 
 function getCursorPosition(canvas, event) {

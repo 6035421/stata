@@ -209,9 +209,9 @@ body {
     background-image:url('https://preview.redd.it/1gs2eatxdjj71.jpg?auto=webp&s=048aab89bc212ab1d63341beca8d298f862e009b');
     background-size:100%;
     background-repeat:no-repeat;
-    background-position:center;
+    background-position:center 30%;
 
-    opacity: 0.4;
+    opacity: 0.5;
 }
 
 .fadeIn {

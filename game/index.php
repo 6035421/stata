@@ -1,3 +1,9 @@
+<?php 
+if(isset($_GET['easteregg'])) {
+    
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
