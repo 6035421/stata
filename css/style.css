@@ -255,6 +255,8 @@ main {
     background-size:cover;
 
     opacity: 0.0;
+
+    display:none;
 }
 
 #GlitchTrap {
@@ -268,7 +270,7 @@ main {
     background-repeat:no-repeat;
     background-position:center 30%;
 
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 .fadeIn {

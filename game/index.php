@@ -1,6 +1,8 @@
 <?php 
+include '../badges/badges.php';
+
 if(isset($_GET['easteregg'])) {
-    
+    grantBadge('The man behind the slaughter');
 }
 ?>
 

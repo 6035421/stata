@@ -563,6 +563,7 @@ function gameOver() {
 }
 
 function startCorruption () {
+    glitch.style.display = 'block';
     glitch.classList.add('fadeIn');
 
     window.setTimeout(function () { // use timeout to wait till animation finishes animationend hangs and crashes browser
