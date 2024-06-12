@@ -52,7 +52,7 @@ if (isset($_POST['logout'])) {
                 <?php
         if(isset($_SESSION['id'])) {
             echo "<a class='pixel-corners' id='vrienden' href='./vrienden.php'>Vrienden</a>";
-            echo "<a class='pixel-corners' id='account' href='./profile.php'>Account</a>";
+            echo "<a class='pixel-corners' id='account' href='./profile.php?id=" . $_SESSION['id'] . "'>Account</a>";
         } else {
             echo "<a class='pixel-corners' id='vrienden' disabled href='./login/index.php'>Vrienden</a>";
             echo "<a class='pixel-corners' id='account' href='./login/index.php'>Account</a>";
