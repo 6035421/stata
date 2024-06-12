@@ -1,5 +1,6 @@
 <?php
 include '../database/connect.php';
+include '../badges/badges.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['gebruikersnaam'];
@@ -9,11 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare the SQL statement
-    $stmt = $conn->prepare("INSERT INTO gebruikers (gebruikersnaam, wachtwoord) VALUES (?, ?)");
+    $stmt = $conn->prepare("INSERT INTO gebruikers (gebruikersnaam, wachtwoord, badges) VALUES (?, ?, 'Nom Nom Nom welcome to STATA
+')");
     $stmt->bind_param("ss", $username, $hashed_password);
 
     if ($stmt->execute()) {
-        echo "User registered successfully";
+        grantBadge('Nom Nom Nom welcome to STATA');
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -25,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
     <h2>Sign Up</h2>

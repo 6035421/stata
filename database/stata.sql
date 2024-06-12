@@ -24,26 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `admin`
---
-
-CREATE TABLE `admin` (
-  `id` int(20) NOT NULL,
-  `gebruikersnaam` varchar(225) NOT NULL,
-  `wachtwoord` varchar(225) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `admin`
---
-
-INSERT INTO `admin` (`id`, `gebruikersnaam`, `wachtwoord`) VALUES
-(0, 'STATA', '$2y$10$bBd3iKOYMe4uSHdatNRM3OwILaCKUqCx2HRQ1zOdwto7.gHQZAvbO');
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `gebruikers`
+-- Table structure for table `gebruikers`
 --
 
 CREATE TABLE `gebruikers` (
@@ -54,7 +35,7 @@ CREATE TABLE `gebruikers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `gebruikers`
+-- Dumping data for table `gebruikers`
 --
 
 INSERT INTO `gebruikers` (`id`, `gebruikersnaam`, `wachtwoord`, `foto`) VALUES
@@ -78,14 +59,14 @@ ALTER TABLE `gebruikers`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `gebruikers`
+-- AUTO_INCREMENT for table `gebruikers`
 --
 ALTER TABLE `gebruikers`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
