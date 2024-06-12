@@ -344,7 +344,7 @@ function startScoreCounting() {
         score += 0.01;
         scoreEl.innerHTML = `Score: ${score.toFixed(3)}`;
 
-        if( score > 200 && score < 201) {
+        if( score > 600 && score < 601) {
             startCorruption();
         }
     }, 1);
