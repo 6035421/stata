@@ -46,4 +46,5 @@
 </body>
     <script src="/js/game.js"></script>
     <script src="/js/index.js"></script>
+    <script src="/js/enemy.js"></script>
 </html>
