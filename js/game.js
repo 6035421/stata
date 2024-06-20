@@ -1,8 +1,13 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+
 const startButton = document.getElementById('start');
 const scoreEl = document.getElementById('highscore');
+const glitch = document.getElementById('glitch');
+
 const startTime = performance.now();
+
+
 let menu = document.getElementById('menu');
 let scoreTimer, score = 0;
 let playerImage, x, y, width, height, enemyX, enemeyY;
@@ -337,7 +342,11 @@ function startScoreCounting() {
 
     scoreTimer = window.setInterval(function () {
         score += 0.01;
-        scoreEl.innerHTML = `Score: ${score.toFixed(3)}`
+        scoreEl.innerHTML = `Score: ${score.toFixed(3)}`;
+
+        if( score > 200 && score < 201) {
+            startCorruption();
+        }
     }, 1);
 }
 
@@ -544,14 +553,23 @@ function gameOver() {
         ctx.fillText('GAME OVER', gameCanvas.width / 2 - 150, gameCanvas.height / 2);
 
         ctx.font = '15px Arial';
-        ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
-        ctx.fillText(`Score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        ctx.fillText(`Score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 55, (gameCanvas.height / 2) + 26);
         // When paused the player can't move
         startButton.textContent = '▶';
 
         // When paused the player can't move
         removeControls();
     }, 10);
+}
+
+function startCorruption () {
+    glitch.style.display = 'block';
+    glitch.classList.add('fadeIn');
+
+    window.setTimeout(function () { // use timeout to wait till animation finishes animationend hangs and crashes browser
+        window.location.href = `${window.location.href}?easteregg=true`;
+        //window.location.reload();
+    },119000);
 }
 
 function getCursorPosition(canvas, event) {

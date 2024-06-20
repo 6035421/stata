@@ -1,6 +1,6 @@
 const fullscreenButton = document.getElementById("fullscreen");
 const gameCanvas = document.getElementById("gameCanvas");
-const body = document.body
+const body = document.body;
 const home = document.getElementById('home');
 const restart = document.getElementById('restart');
 
@@ -45,3 +45,4 @@ fullscreenButton.addEventListener("click", () => {
       }
 }
 });
+
