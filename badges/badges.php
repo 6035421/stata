@@ -4,6 +4,8 @@ function grantBadge ($name) {
     session_start();
     include '../database/connect.php';
 
+    try {
+
     $sql = "UPDATE `gebruikers` SET `badges` = CONCAT(`badges`, ',', '".$name."') WHERE id = '".$_SESSION['id']."'";
 
     $result = $conn->query($sql);
@@ -26,5 +28,6 @@ function grantBadge ($name) {
         echo "<script src='../js/removeBadge.js'></script>";
 
         $conn->close();
+    } catch (Exception $e) {}
 }
         ?>

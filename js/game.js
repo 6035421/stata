@@ -7,6 +7,7 @@ const glitch = document.getElementById('glitch');
 
 const startTime = performance.now();
 
+let recentsScores = [];
 
 let menu = document.getElementById('menu');
 let scoreTimer, score = 0;
@@ -332,9 +333,16 @@ startButton.addEventListener('click', function () {
 });
 
 function cancelScoreCounting() {
+    if(window.sessionStorage.getItem('recentScores') !== null ) {
+        recentsScores = window.sessionStorage.getItem('recentScores').split(',');
+    }
+
     scoreEl.style.display = 'none';
 
     window.clearInterval(scoreTimer);
+
+    recentsScores.push(score);
+    window.sessionStorage.setItem('recentScores', recentsScores);
 }
 
 function startScoreCounting() {

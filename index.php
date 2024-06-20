@@ -45,6 +45,10 @@ if (isset($_POST['logout'])) {
                 echo '<h1 class="gast">Welkom, gast</h1><br />';
             }
             ?>
+
+            <article>
+            <a href="./game/highscores.php" id='highscore'>Highscores</a>
+            </article>
             
             <article id='buttons'>
                 <a class='pixel-corners' id='play' href='./game/index.php'>Play</a>
