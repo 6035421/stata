@@ -33,7 +33,7 @@ if(isset($_GET['easteregg'])) {
                 <button class='pixel-corners' id="fullscreen">⛶</button>
                 <button class='pixel-corners' id="controls" onclick="openPop()">🎮</button>
             <article class='pixel-corners' id="popupDialog">
-                <p>Controls<br>D and -> =walk forward<br>A & <- =walk backwards<br>W & space 3=jump<br><br></p>
+                <p>Controls<br>D and -> =walk forward<br>A & <- =walk backwards<br>W & space =jump<br><br></p>
                 <button class='pixel-corners' id='popupClose' onclick="openPop()">
                     Close
                 </button>

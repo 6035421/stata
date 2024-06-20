@@ -180,7 +180,64 @@ body {
 }
 
 .welkom,
-.gast {
+.gast,
+.vrienden {
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    row-gap:8px;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width:100%;
+    height:100%;
+}
+
+.buttons {
+    width:60%;
+    padding:8px;
+
+    background-color: rgb(255, 117, 117);
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.buttons * {
+    width:100%;
+
+    border-width:0px;
+
+    padding:5px;
+}
+
+.buttons input {
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.friends {
+    display:flex;
+    flex-direction: row;
+    column-gap:8px;
+
+    margin-bottom:8px;
+}
+
+.selected {
+    background-color: rgb(173, 172, 172) !important;
+}
+
+.welkom {
     align-items: center;
     justify-content: center;
     display: flex;
@@ -194,30 +251,28 @@ body {
     background-color: rgb(255, 117, 117);
     color: white;
     border: none;
+    position: fixed;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
     border-radius: 10px;
-    position: fixed;
-    margin-left: 41px;
-    padding-bottom: 100px;
-    padding-left: 25px;
+    padding-bottom: 105px;
+    padding-left: 26px;
     padding-right: 25px;
+    margin-left: 41px;
 }
 
-#popupClose{
-    background-color: rgb(248, 242, 242);
-    color: rgb(226, 104, 104);
+#popupClose {
+    background-color: white;
+    color: rgb(255, 117, 117);
     border: none;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin-top: 20px;
     cursor: pointer;
     border-radius: 10px;
-
+    margin-top: 20px;
 }
