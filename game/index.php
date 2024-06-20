@@ -1,3 +1,11 @@
+<?php 
+include '../badges/badges.php';
+
+if(isset($_GET['easteregg'])) {
+    grantBadge('The man behind the slaughter');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +51,12 @@
             </article>
         </section>
     </main>
+
+    <div id='glitch'>
+        <div id='GlitchTrap'>
+            
+        </div>
+    </div>
 
     <div id='testDiv'></div>
 

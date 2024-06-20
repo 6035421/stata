@@ -1,8 +1,13 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+
 const startButton = document.getElementById('start');
 const scoreEl = document.getElementById('highscore');
+const glitch = document.getElementById('glitch');
+
 const startTime = performance.now();
+
+
 let menu = document.getElementById('menu');
 let scoreTimer, score = 0;
 let playerImage, x, y, width, height, enemyX, enemeyY;
@@ -78,7 +83,12 @@ function changeLevel(level) {
             ctx.drawImage(ladderImage, 400, 515, 100, 100);
             ctx.drawImage(ladderExtensionImage, 400, 450, 100, 70);
 
+            // between row 2 and 3
+            ctx.drawImage(plankImage, 700, 490, 50, 50);
+
             //planks row 3
+            ctx.drawImage(plankImage, 900, 600, 50, 50);
+            ctx.drawImage(plankImage, 950, 600, 50, 50);
             ctx.drawImage(plankImage, 1000, 600, 50, 50);
             ctx.drawImage(plankImage, 1050, 600, 50, 50);
             ctx.drawImage(plankImage, 1100, 600, 50, 50);
@@ -261,6 +271,21 @@ function changeLevel(level) {
         console.log(`Level 3 geladen in ${loadTime} milliseconden`);
     }
 };
+// enemyXmove, enemyYmove variables
+let enemyXmove = 1;
+let enemyYmove = 1;
+
+// enemy ai movement (enemyXmove, enemyYmove)
+function enemyAI() {
+    if (enemyX > 1000) {
+        enemyXmove = -1;
+    }
+    if (enemyX < 100) {
+        enemyXmove = 1;
+    }
+    enemyX += enemyXmove;
+}
+
 
 // Start button
 startButton.addEventListener('click', function () {
@@ -317,7 +342,11 @@ function startScoreCounting() {
 
     scoreTimer = window.setInterval(function () {
         score += 0.01;
-        scoreEl.innerHTML = `Score: ${score.toFixed(3)}`
+        scoreEl.innerHTML = `Score: ${score.toFixed(3)}`;
+
+        if( score > 200 && score < 201) {
+            startCorruption();
+        }
     }, 1);
 }
 
@@ -524,14 +553,23 @@ function gameOver() {
         ctx.fillText('GAME OVER', gameCanvas.width / 2 - 150, gameCanvas.height / 2);
 
         ctx.font = '15px Arial';
-        ctx.fillText(`Current score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
-        ctx.fillText(`Score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 75, (gameCanvas.height / 2) + 26);
+        ctx.fillText(`Score: ${score.toFixed(3)}`, gameCanvas.width / 2 - 55, (gameCanvas.height / 2) + 26);
         // When paused the player can't move
         startButton.textContent = '▶';
 
         // When paused the player can't move
         removeControls();
     }, 10);
+}
+
+function startCorruption () {
+    glitch.style.display = 'block';
+    glitch.classList.add('fadeIn');
+
+    window.setTimeout(function () { // use timeout to wait till animation finishes animationend hangs and crashes browser
+        window.location.href = `${window.location.href}?easteregg=true`;
+        //window.location.reload();
+    },119000);
 }
 
 function getCursorPosition(canvas, event) {
