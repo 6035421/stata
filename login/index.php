@@ -34,17 +34,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/login-signup.css">
     <link rel="icon" type="image/x-icon" href="../assets/images/New Piskel.png">
 </head>
 <body>
-    <h2>Login</h2>
+    <article id='logo'>
+        <img src="/assets/images/logo.png" alt="player">
+    </article>
+    <section class="abovetext">
+        <h1>Login</h1>
+        <p>Log in je account om vrienden te maken.</p>
+    </section>
+
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         Username: <input type="text" name="gebruikersnaam" required><br>
         Password: <input type="password" name="wachtwoord" required><br>
         <input type="submit" value="Login">
     </form>
-
+        -
     <a href='../signup/index.php'>Sign-Up Instead</a>
 </body>
 </html>

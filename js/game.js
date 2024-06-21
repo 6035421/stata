@@ -272,20 +272,6 @@ function changeLevel(level) {
         console.log(`Level 3 geladen in ${loadTime} milliseconden`);
     }
 };
-// enemyXmove, enemyYmove variables
-let enemyXmove = 1;
-let enemyYmove = 1;
-
-// enemy ai movement (enemyXmove, enemyYmove)
-function enemyAI() {
-    if (enemyX > 1000) {
-        enemyXmove = -1;
-    }
-    if (enemyX < 100) {
-        enemyXmove = 1;
-    }
-    enemyX += enemyXmove;
-}
 
 
 // Start button
