@@ -385,7 +385,12 @@ function addControls() {
                     return;
                 }
 
-                checkUnderground();
+                if (checkDeathByEnemy()) {
+                    clearInterval(forward);
+                    gameOver();
+                }
+
+                checkUnderground('right');
                 x += 10;
 
             }, 70);
@@ -399,7 +404,12 @@ function addControls() {
                     return;
                 }
 
-                checkUnderground();
+                if (checkDeathByEnemy()) {
+                    clearInterval(backward);
+                    gameOver();
+                }
+
+                checkUnderground('left');
                 x -= 10;
 
             }, 70);
@@ -447,7 +457,7 @@ function removeControls() {
                     gameOver();
                 }
 
-                checkUnderground();
+                checkUnderground('right');
                 x += 10;
 
             }, 70);
@@ -466,7 +476,7 @@ function removeControls() {
                     gameOver();
                 }
 
-                checkUnderground();
+                checkUnderground('left');
                 x -= 10;
 
             }, 70);
@@ -500,16 +510,25 @@ function fall() {
         }
 
         let color = ctx.getImageData(x + 30, y - 4 + parseInt(height), 1, 1).data.join(',');
+        let colorLeft = ctx.getImageData(x  - 30 - parseInt(width), y - 4 + parseInt(height), 1, 1).data.join(',');
 
         if (color == '172,133,91,255') {
+            clearInterval(interval);
+            playerImage.src = '../sprite/player-normal.png';
+        }else if (colorLeft == '172,133,91,255') {
             clearInterval(interval);
             playerImage.src = '../sprite/player-normal.png';
         }
     }, 7); // 1000 voor testen
 }
 
-function checkUnderground() {
-    let color = ctx.getImageData(x + 30, y - 3 + parseInt(height), 1, 1).data.join(',');
+function checkUnderground(dir = 'right') {
+    let xPos = x + 30;
+    if(dir == 'left') {
+        xPos = x - 30 + parseInt(width);
+    }
+
+    let color = ctx.getImageData(xPos, y - 3 + parseInt(height), 1, 1).data.join(',');
 
     if (color == '172,133,91,255') {} else {
         fall();
