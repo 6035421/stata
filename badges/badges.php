@@ -1,11 +1,14 @@
 <?php 
 
 function grantBadge ($name) {
+    session_start();
     include '../database/connect.php';
-    $stmt = $conn->prepare("INSERT INTO gebruikers (badges) VALUES (?)");
-        $stmt->bind_param("s", $name);
-    
-        $stmt->execute();
+
+    try {
+
+    $sql = "UPDATE `gebruikers` SET `badges` = CONCAT(`badges`, ',', '".$name."') WHERE id = '".$_SESSION['id']."'";
+
+    $result = $conn->query($sql);
 
         $sql = "SELECT * FROM badges WHERE naam = '".$name."'";
 
@@ -24,6 +27,7 @@ function grantBadge ($name) {
 
         echo "<script src='../js/removeBadge.js'></script>";
 
-        $stmt->close();
+        $conn->close();
+    } catch (Exception $e) {}
 }
         ?>
